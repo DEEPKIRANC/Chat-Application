@@ -1,0 +1,21 @@
+:root
+{
+  --primary-background-color:#ECE5DD;
+  --app-background-color:#15202B;
+}
+
+.App
+{
+  display: grid;
+  place-items: center;
+  background-color: var(--primary-background-color);
+  height:100vh;
+}
+
+.app__body
+{
+  background-color: var(--app-background-color);
+  height: 90vh;
+  width:90vw;
+  display: flex;
+}
