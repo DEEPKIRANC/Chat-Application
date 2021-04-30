@@ -11,9 +11,12 @@ useEffect(()=>{
     setRandomText(Math.floor(Math.random() * 5000));
 },[])
 
+const handleClick=()=>{
+    
+}
     
     return (
-        <div className="chats">
+        <div className="chats" onClick={handleClick}>
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
            <div className="channel_info"> 
                 <h3>Group Name</h3>

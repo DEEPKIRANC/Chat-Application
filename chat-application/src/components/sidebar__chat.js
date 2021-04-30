@@ -8,6 +8,15 @@ function SidebarChat() {
             <Chat />
             <Chat />
             <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
+            <Chat />
         </div>
     )
 }

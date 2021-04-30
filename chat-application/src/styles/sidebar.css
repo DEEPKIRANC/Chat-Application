@@ -50,9 +50,9 @@
     flex:0.90;
     width:100%;
     
-    overflow: auto;
+    overflow: scroll;
 }
-.sidebar__chatbody ::-webkit-scrollbar
+.sidebar__chatbody::-webkit-scrollbar
 {
     display: none;
     width:0px;

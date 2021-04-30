@@ -7,7 +7,7 @@ function Sidebar() {
     return (
         <div className="sidebar__component">
             <div className="header">
-                <Avatar style={{width:'3rem',height:'3rem'}} srcSet="../temp_images/Profile_Deep-min.jpg"/>
+                <Avatar src="https://avatars.dicebear.com/api/human/1234.svg" style={{width:'3rem',height:'3rem'}} />
                 <span><div className="statusColor"></div>Currently Active</span>
                 <IconButton>
                     <ExitToAppIcon style={{color:"white"}} />
