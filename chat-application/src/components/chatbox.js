@@ -2,10 +2,13 @@ import React ,{useState,useEffect} from 'react'
 import {useMediaQuery} from "react-responsive";
 import EditIcon from '@material-ui/icons/Edit';
 import MoreVert from '@material-ui/icons/MoreVert';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import {Avatar , IconButton} from "@material-ui/core";
 import "../styles/chatbox.css"
 function Chatbox() {
     const [boolval,setBoolVal]=useState(false);
+    const [input,setInput]=useState("");
 
     useEffect(()=>{
 
@@ -15,6 +18,11 @@ function Chatbox() {
 
     },[])
 
+    const sendMessage=(e)=>{
+        e.preventDefault();
+        console.log("You have typed =>>>" + input);
+        setInput("");
+    }
 
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
    
@@ -53,11 +61,22 @@ function Chatbox() {
                     Hey Deep! Welcome to the group.
                     <span className="timestamp">10:05 pm</span>
                 </p>
-</div>}    
+                </div>}    
           </div>
           <div className="chat__footer">
-          </div>    
-        </div>
+              <IconButton>
+                <InsertEmoticonIcon style={{color:"white"}}/>
+              </IconButton>
+              <form>
+                <input type="text" placeholder="Type Your Message Here" value={input}  onChange={e=>setInput(e.target.value)} />
+                <button type="submit"  onClick={(e)=>sendMessage(e)}></button>
+              </form>
+              <IconButton>
+                <AddAPhotoIcon style={{color:"white"}}/>
+              </IconButton>  
+          </div>   
+
+       </div> 
     )
    }
    else
