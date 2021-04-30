@@ -11,7 +11,7 @@ function Chatbox() {
    {
     return (
         <div className="chatbox__body">
-            <div className="header">
+          <div className="header">
                 <Avatar src="https://avatars.dicebear.com/api/human/123.svg" style={{width:'3rem',height:'3rem'}}  />
             <div className="channel_info"> 
                 <h3>Group Name</h3>
@@ -23,7 +23,11 @@ function Chatbox() {
                 <IconButton>
                     <MoreVert style={{color:"white"}}/>
                 </IconButton>                
-            </div>
+          </div>
+          <div className="chatbody">
+          </div>
+          <div className="chat__footer">
+          </div>    
         </div>
     )
    }

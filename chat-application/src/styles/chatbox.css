@@ -32,3 +32,18 @@
 {
     font-size: 1.2rem;
 }
+
+.chatbody
+{
+    flex:0.83;
+    background-image:url("../chat_background1.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    overflow: auto;
+    padding:1.5rem;
+}
+.chat__footer
+{
+    flex:0.07;
+    background-color: #22303C;
+}
