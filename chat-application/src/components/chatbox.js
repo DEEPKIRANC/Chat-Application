@@ -1,14 +1,29 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import {useMediaQuery} from "react-responsive";
 import EditIcon from '@material-ui/icons/Edit';
 import MoreVert from '@material-ui/icons/MoreVert';
 import {Avatar , IconButton} from "@material-ui/core";
 import "../styles/chatbox.css"
 function Chatbox() {
+    const [boolval,setBoolVal]=useState(false);
+
+    useEffect(()=>{
+
+        setTimeout(()=>{
+            setBoolVal(true)
+        },3000)
+
+    },[])
+
+
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
-   // console.log(windowSize);
+   
    if(!windowSize)
    {
+
+
+
+
     return (
         <div className="chatbox__body">
           <div className="header">
@@ -25,6 +40,20 @@ function Chatbox() {
                 </IconButton>                
           </div>
           <div className="chatbody">
+              <div className="chat_message">
+                <p>
+                    <span className="name">Deep Kiran</span>
+                    Hey ! This is my first message.
+                    <span className="timestamp">10:00 pm</span>
+                </p>
+              </div>
+
+              {boolval && <div className="chat_message sender"><p>
+                    <span className="name">Harsh Seth</span>
+                    Hey Deep! Welcome to the group.
+                    <span className="timestamp">10:05 pm</span>
+                </p>
+</div>}    
           </div>
           <div className="chat__footer">
           </div>    

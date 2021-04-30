@@ -1,3 +1,7 @@
+:root
+{
+    --secondary-background-color:#22303C;
+}
 .chatbox__body
 {
     flex:0.65;
@@ -42,6 +46,37 @@
     overflow: auto;
     padding:1.5rem;
 }
+
+.chat_message
+{
+    border-radius:10px;
+    background:var(--secondary-background-color);
+    padding:1rem;
+    color:white;
+    width:fit-content;
+    position:relative;
+}
+
+.chat_message span.name
+{
+    position: absolute;
+    top:-20px;
+    font-size: small;
+    font-weight:bold;
+}
+
+.chat_message span.timestamp
+{
+    margin-left:10px;
+    font-size: x-small;
+}
+
+.sender
+{
+    background-color: rgb(85, 82, 82);
+    margin-left:auto;
+}
+
 .chat__footer
 {
     flex:0.07;
