@@ -8,6 +8,7 @@
 {
     flex:0.35;
     height:100%;
+    padding: 0;
     display: flex;
     flex-direction: column;
     border-right:1px solid #22303C;
@@ -42,4 +43,17 @@
     background-color: limegreen;
     display: inline-block;
     margin-right: 10px;
+}
+
+.sidebar__chatbody
+{
+    flex:0.90;
+    width:100%;
+    
+    overflow: auto;
+}
+.sidebar__chatbody ::-webkit-scrollbar
+{
+    display: none;
+    width:0px;
 }
