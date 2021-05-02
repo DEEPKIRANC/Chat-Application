@@ -3,10 +3,10 @@ import React,{useState,createContext} from "react"
 const DataContext =createContext();
 
 const DataProvider =(props)=>{
-const [chatlistdisplay,setChatListDisplay]=useState(true);
-const [chatboxdisplay,setChatBoxDisplay]=useState(true);
+const [userlogin,setUserLogin]=useState(false);
+//const [chatboxdisplay,setChatBoxDisplay]=useState(true);
 
-<DataContext.Provider value={[chatlistdisplay,setChatListDisplay,chatboxdisplay,setChatBoxDisplay]}>
+return <DataContext.Provider value={[userlogin,setUserLogin]}>
 {props.children}
 
 </DataContext.Provider>

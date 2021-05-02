@@ -5,6 +5,7 @@ import {useMediaQuery} from "react-responsive";
 import {Link} from "react-router-dom";
 
 
+
 function Chat() {
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
     const [randomText,setRandomText]=useState("");

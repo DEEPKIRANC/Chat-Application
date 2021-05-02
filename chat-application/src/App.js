@@ -1,11 +1,17 @@
 import './App.css';
+import {useContext} from "react";
 import Chatbox from './components/chatbox';
 import Sidebar from './components/sidebar';
 import {BrowserRouter as Router , Switch , Route} from "react-router-dom";
 import Test from './components/Test';
+import {DataContext} from "./hooks/Dataprovider";
+import Login from './components/Login';
 
 
 function App() {
+ 
+  const [userlogin,]=useContext(DataContext);
+ 
   return (
     <Router>
     <div className="App">
@@ -19,10 +25,11 @@ function App() {
         </Route> 
 
         <Route path="/" exact>  
-        <div className="app__body">
+        {userlogin ?<div className="app__body">
           <Sidebar />
           <Chatbox />
-          </div>  
+          </div> : <Login />  }
+        
         </Route>
 
         </Switch>

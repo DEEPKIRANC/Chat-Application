@@ -5,6 +5,7 @@ import MoreVert from '@material-ui/icons/MoreVert';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import {Avatar , IconButton} from "@material-ui/core";
+
 import "../styles/chatbox.css"
 function Chatbox() {
     const [boolval,setBoolVal]=useState(false);
@@ -16,7 +17,8 @@ function Chatbox() {
             setBoolVal(true)
         },3000)
 
-    },[])
+    }
+    ,[])
 
     const sendMessage=(e)=>{
         e.preventDefault();
@@ -35,6 +37,7 @@ function Chatbox() {
     return (
         <div className="chatbox__body">
           <div className="header">
+          
                 <Avatar src="https://avatars.dicebear.com/api/human/123.svg" style={{width:'3rem',height:'3rem'}}  />
             <div className="channel_info"> 
                 <h3>Group Name</h3>
