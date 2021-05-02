@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
     <div className="App">
-      <div className="app__body">
+    
         <Switch>
         
         <Route path="/mobilechat" exact>
@@ -19,13 +19,15 @@ function App() {
         </Route> 
 
         <Route path="/" exact>  
+        <div className="app__body">
           <Sidebar />
           <Chatbox />
+          </div>  
         </Route>
-         
+
         </Switch>
       </div>  
-    </div>
+    
     </Router>
   );
 }

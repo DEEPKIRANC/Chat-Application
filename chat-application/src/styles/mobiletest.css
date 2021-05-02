@@ -1,0 +1,125 @@
+*
+{
+    box-sizing:border-box;
+}
+
+:root
+{
+    --secondary-background-color:#22303C;
+}
+.chatbox__body
+{
+    flex:1;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+}
+.header
+{
+    width:100%;
+    flex:0.10;
+    background-color: #22303C;
+    text-align: center;
+    color: white;
+    display: flex;
+    padding:0rem 1rem;
+    align-items: center;
+}
+.chatbox__body .channel_info
+{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    justify-content:center;
+    padding-left: 1rem;
+    row-gap:0.5rem;
+    align-items: flex-start;
+}
+
+.channel_info h3
+{
+    font-size: 0.85rem;
+}
+.channel_info p
+{
+    font-size:0.7rem;
+}
+
+.chatbody
+{
+    flex:0.83;
+    background-image:url("../chat_background1.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    overflow: auto;
+    padding:1.80rem;
+}
+
+.chat_message
+{
+    border-radius:10px;
+    background:var(--secondary-background-color);
+    padding:1rem;
+    color:white;
+    width:fit-content;
+    position:relative;
+    margin-bottom: 30px;
+}
+
+.chat_message span.name
+{
+    position: absolute;
+    top:-20px;
+    font-size: small;
+    font-weight:bold;
+}
+
+.chat_message span.timestamp
+{
+    margin-left:10px;
+    font-size: x-small;
+}
+
+.sender
+{
+    background-color: rgb(85, 82, 82);
+    margin-left:auto;
+   
+}
+
+.chat__footer
+{
+    flex:0.07;
+    background-color: #22303C;
+    padding:0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat__footer > form
+{
+    flex:1;
+    display: flex;
+    
+}
+
+.chat__footer > form > input
+{
+    flex:1;
+    
+    padding:0.5rem;
+    border-radius:1.5rem;
+    border:none;
+    outline:none;
+}
+
+.chat__footer > form > button
+{
+    display: none;
+}
+
+.chat_message,.sender p
+{
+    font-size:0.80rem;
+}
