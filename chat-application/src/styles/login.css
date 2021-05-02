@@ -16,10 +16,21 @@
 {
     height:90vh;
     width:90vw;
-    background-color: #ebebeb;
+    background-color: #15202B;
     display:flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+}
+
+.imageelement
+{
+    background-image:url("../loginbackground.png");
+    height: 300px;
+    width:300px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
 }
 .inner_div > form
 {
@@ -37,4 +48,48 @@
     border:none;
     outline: none;
     margin-bottom: 30px;
+    margin-left: 20px;
+    font-size: 1.1rem;
+    font-family: 'Nunito','sans-serif';
+}
+
+.inner_div > form > button
+{
+    padding:0.5rem 4rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border:2px solid white;
+    outline: none;
+    background-color: #15202B;
+    color:white;
+    font-size: 1.25rem;
+    font-family: 'Nunito','sans-serif';
+    font-weight: bold;
+
+}
+form > p,span
+{
+    margin-top: 20px;
+    color:white;
+    font-family: 'Nunito','sans-serif';
+}
+
+@media screen and (max-width : 600px)
+{
+    .inner_div{
+        flex-direction: column;
+    }
+    .imageelement{
+        height:200px;
+        width:200px;
+    }
+    .inner_div > form > input
+    {
+        margin-left: 0;
+        font-size: 0.80rem;
+    }
+    .inner_div > form > button
+    {
+        font-size: 1rem;
+    }
 }
