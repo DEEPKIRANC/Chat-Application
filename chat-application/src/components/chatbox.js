@@ -9,13 +9,13 @@ import {DataContext} from "../hooks/Dataprovider"
 
 import "../styles/chatbox.css"
 function Chatbox() {
-    const [userlogin,setUserLogin,selectedChat,setSelectedChat]=useContext(DataContext);
+    const [,,selectedChat,]=useContext(DataContext);
     const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
 
     useEffect(()=>{
 
-        console.log(selectedChat);
+       
         setTimeout(()=>{
             setBoolVal(true)
         },3000)

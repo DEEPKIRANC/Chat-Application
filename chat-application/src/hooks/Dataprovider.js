@@ -9,7 +9,7 @@ const [selectedChat,setSelectedChat]=useState([]);
 
 useEffect(()=>{
 
-{
+
     db.collection("groups").orderBy("createdAt","desc").onSnapshot((snapshot)=>{
        
         const groups=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
@@ -17,7 +17,7 @@ useEffect(()=>{
         setSelectedChat(groups);    
     });
     
-}
+
 },[])
 
 return <DataContext.Provider value={[userlogin,setUserLogin,selectedChat,setSelectedChat]}>

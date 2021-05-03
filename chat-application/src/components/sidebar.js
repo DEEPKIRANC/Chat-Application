@@ -7,7 +7,7 @@ import SidebarChat from './sidebar__chat';
 import {DataContext} from "../hooks/Dataprovider";
 import {firebaseApp} from "../firebase";
 function Sidebar() {
-    const [userlogin,setUserLogin]=useContext(DataContext);
+    const [userlogin,,,]=useContext(DataContext);
 
     const [userDetails,setUserDetails]=useState('');
     useEffect(()=>{
@@ -18,7 +18,7 @@ function Sidebar() {
             )
 
         }
-    },[])
+    },[userlogin])
 
     const handleLogOut=()=>{
         firebaseApp.auth().signOut();
