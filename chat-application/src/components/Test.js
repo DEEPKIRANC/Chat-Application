@@ -15,7 +15,7 @@ function Test() {
     const [input,setInput]=useState("");
 
     useEffect(()=>{
-
+        console.log(selectedChat);
         setTimeout(()=>{
             setBoolVal(true)
         },3000)

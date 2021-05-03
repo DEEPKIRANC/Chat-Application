@@ -12,9 +12,9 @@ function SidebarChat() {
     return (
         <div className="sidebar__chatbody"> 
             {groups.length>0 ? 
-            groups.map((group)=>(
+            groups.map((group,index)=>(
                 <Chat 
-               
+                key={index}
                 id={group.id}
                 name={group.name}  
                   />
