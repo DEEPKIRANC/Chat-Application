@@ -6,6 +6,7 @@ const DataContext =createContext();
 const DataProvider =(props)=>{
 const [userlogin,setUserLogin]=useState("");
 const [selectedChat,setSelectedChat]=useState([]);
+const [groups,setGroups]=useState([]);
 
 useEffect(()=>{
 
@@ -13,14 +14,15 @@ useEffect(()=>{
     db.collection("groups").orderBy("createdAt","desc").onSnapshot((snapshot)=>{
        
         const groups=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
-        console.log(groups);
+        //console.log(groups);
         setSelectedChat(groups);    
+        setGroups(groups);
     });
     
 
 },[])
 
-return <DataContext.Provider value={[userlogin,setUserLogin,selectedChat,setSelectedChat]}>
+return <DataContext.Provider value={[userlogin,setUserLogin,selectedChat,setSelectedChat,groups,setGroups]}>
 {props.children}
 
 </DataContext.Provider>

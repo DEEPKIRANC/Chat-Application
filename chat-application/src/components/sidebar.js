@@ -28,7 +28,7 @@ function Sidebar() {
             <div className="header">
                 <Avatar src="https://avatars.dicebear.com/api/human/1234.svg" style={{width:'3rem',height:'3rem'}} />
                 <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
-                <p><div className="statusColor"></div>{userlogin && <>{userDetails.status}</>}</p>
+                <p><span className="statusColor"></span>{userlogin && <>{userDetails.status}</>}</p>
                 <IconButton>
                     <ExitToAppIcon onClick={handleLogOut} style={{color:"white"}} />
                 </IconButton>

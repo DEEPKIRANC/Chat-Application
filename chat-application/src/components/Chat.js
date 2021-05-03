@@ -6,10 +6,10 @@ import {Link} from "react-router-dom";
 
 
 
-function Chat() {
+function Chat(props) {
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
     const [randomText,setRandomText]=useState("");
- 
+    const {id,name}=props;
         
 useEffect(()=>{
     
@@ -29,7 +29,7 @@ const handleClick=()=>{
         <div className="chats" onClick={handleClick}>
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
            <div className="channel_info"> 
-                <h3>Group Name</h3>
+                <h3>{name}</h3>
                 <p>Last Message</p>
             </div>
             <span>Timestamp</span>
@@ -43,7 +43,7 @@ const handleClick=()=>{
         <div className="chats" onClick={handleClick}>
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
            <div className="channel_info"> 
-                <h3>Group Name</h3>
+                <h3>{name}</h3>
                 <p>Last Message</p>
             </div>
             <span>Timestamp</span>
