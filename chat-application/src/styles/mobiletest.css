@@ -70,7 +70,7 @@
 .chat_message span.name
 {
     position: absolute;
-    top:-20px;
+    top:-40px;
     font-size: small;
     font-weight:bold;
 }

@@ -1,3 +1,7 @@
+*
+{
+    font-family: 'Nunito','sans-serif';
+}
 :root
 {
     --secondary-background-color:#22303C;
@@ -60,8 +64,9 @@
 
 .chat_message span.name
 {
-    position: absolute;
-    top:-20px;
+    
+    position:absolute;
+    margin-top: 20px;
     font-size: small;
     font-weight:bold;
 }

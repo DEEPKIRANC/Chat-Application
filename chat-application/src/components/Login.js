@@ -6,7 +6,7 @@ import firebase from "firebase";
  
 
 function Login() {
-    const [userlogin,setUserLogin]=useContext(DataContext);
+    const [userlogin,setUserLogin,,]=useContext(DataContext);
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");

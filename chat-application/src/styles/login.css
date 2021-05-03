@@ -25,6 +25,7 @@
 
 .imageelement
 {
+    object-fit: contain;
     background-image:url("../loginbackground.png");
     height: 300px;
     width:300px;
@@ -86,8 +87,8 @@ form > p,span
         flex-direction: column;
     }
     .imageelement{
-        height:200px;
-        width:200px;
+        height:150px;
+        width:150px;
     }
     .inner_div > form > input
     {

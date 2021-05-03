@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import {Link} from "react-router-dom";
 import "../styles/mobiletest.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -7,9 +7,10 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {Avatar , IconButton} from "@material-ui/core";
+import {DataContext} from "../hooks/Dataprovider";
 
 function Test() {
-
+    const[,,selectedChat,setSelectedChat]=useContext(DataContext);
     const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
 
@@ -33,8 +34,8 @@ function Test() {
                 <Link to="/"><ArrowBackIcon style={{color:"white"}}/></Link>
                 <Avatar src="https://avatars.dicebear.com/api/human/123.svg" style={{width:'2rem',height:'2rem'}}  />
             <div className="channel_info"> 
-                <h3>Group Name</h3>
-                <p>Last Seen at...</p>
+            <h3>{selectedChat.length>0?selectedChat[0].name:null}</h3>
+                <p>{selectedChat.length>0?selectedChat[0].description.substring(0,20)+"...":null}</p>
             </div>
                 <IconButton>
                     <EditIcon style={{color:"white"}}/>
