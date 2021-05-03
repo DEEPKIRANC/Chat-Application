@@ -5,6 +5,7 @@ import "../styles/sidebar.css"
 import {db} from "../firebase";
 import SidebarChat from './sidebar__chat';
 import {DataContext} from "../hooks/Dataprovider";
+import {firebaseApp} from "../firebase";
 function Sidebar() {
     const [userlogin,setUserLogin]=useContext(DataContext);
 
@@ -18,6 +19,10 @@ function Sidebar() {
 
         }
     },[])
+
+    const handleLogOut=()=>{
+        firebaseApp.auth().signOut();
+    }
     return (
         <div className="sidebar__component">
             <div className="header">
@@ -25,7 +30,7 @@ function Sidebar() {
                 <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
                 <p><div className="statusColor"></div>{userlogin && <>{userDetails.status}</>}</p>
                 <IconButton>
-                    <ExitToAppIcon style={{color:"white"}} />
+                    <ExitToAppIcon onClick={handleLogOut} style={{color:"white"}} />
                 </IconButton>
             </div>
             <SidebarChat/>

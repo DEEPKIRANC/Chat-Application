@@ -85,9 +85,7 @@ function Login() {
         })
     }
     }
-    const handleLogOut=()=>{
-        firebaseApp.auth().signOut();
-    }
+    
 
     const authListener=()=>{
         firebaseApp.auth().onAuthStateChanged((user)=>{
