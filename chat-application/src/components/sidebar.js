@@ -1,14 +1,29 @@
-import React from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { Avatar , IconButton } from "@material-ui/core";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import "../styles/sidebar.css"
+import {db} from "../firebase";
 import SidebarChat from './sidebar__chat';
+import {DataContext} from "../hooks/Dataprovider";
 function Sidebar() {
+    const [userlogin,setUserLogin]=useContext(DataContext);
+
+    const [userDetails,setUserDetails]=useState('');
+    useEffect(()=>{
+        if(userlogin)
+        {
+            db.collection("users").doc(userlogin.uid).get().then(snapshot=>
+                  setUserDetails(snapshot.data())  
+            )
+
+        }
+    },[])
     return (
         <div className="sidebar__component">
             <div className="header">
                 <Avatar src="https://avatars.dicebear.com/api/human/1234.svg" style={{width:'3rem',height:'3rem'}} />
-                <span><div className="statusColor"></div>Currently Active</span>
+                <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
+                <p><div className="statusColor"></div>{userlogin && <>{userDetails.status}</>}</p>
                 <IconButton>
                     <ExitToAppIcon style={{color:"white"}} />
                 </IconButton>

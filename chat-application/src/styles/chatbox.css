@@ -81,8 +81,7 @@
 .chat__footer
 {
     flex:0.07;
-    background-color: #22303C;
-    padding:0.5rem;
+    background-color: #22303C;  
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -68,14 +68,14 @@ function Chatbox() {
           </div>
           <div className="chat__footer">
               <IconButton>
-                <InsertEmoticonIcon style={{color:"white"}}/>
+                <InsertEmoticonIcon style={{color:"white",marginBottom:"20px"}}/>
               </IconButton>
               <form>
                 <input type="text" placeholder="Type Your Message Here" value={input}  onChange={e=>setInput(e.target.value)} />
                 <button type="submit"  onClick={(e)=>sendMessage(e)}></button>
               </form>
               <IconButton>
-                <AddAPhotoIcon style={{color:"white"}}/>
+                <AddAPhotoIcon style={{color:"white",marginBottom:"20px"}}/>
               </IconButton>  
           </div>   
 
