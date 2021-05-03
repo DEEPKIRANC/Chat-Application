@@ -1,7 +1,8 @@
 import React,{useState,useEffect,useContext} from 'react'
 import "../styles/login.css"
 import {DataContext} from "../hooks/Dataprovider";
-import {db,auth} from "../firebase";
+import {db,firebaseApp} from "../firebase";
+import firebase from "firebase";
  
 
 function Login() {
@@ -25,6 +26,89 @@ function Login() {
         setPasswordError('');
     }
 
+    const handleLogin=(e)=>{
+        e.preventDefault();
+        clearErrors();
+   
+        firebaseApp
+        .auth()
+        .signInWithEmailAndPassword(email,password)
+        .catch(err=>{
+            switch(err.code)
+            {
+                case "auth/invalid-email":
+                case "auth/user-disabled":
+                case "auth/user-not-found":
+                    setEmailError(err.message);
+                    break;
+                case "auth/wrong-password":
+                    setPasswordError(err.message);
+                    break;        
+            }
+        })
+    }
+
+
+    const handleSignUp=(e)=>{
+        e.preventDefault();
+        clearErrors();
+        if(name.trim().length<1)
+        {
+        alert("Display Name can't be empty!");
+        }
+        else
+        {
+        firebaseApp
+        .auth()
+        .createUserWithEmailAndPassword(email,password)
+        .then(cred=>{
+            return db.collection("users").doc(cred.user.uid).set({
+                display_name:name,
+                status:"online",
+                createdAt:firebase.firestore.FieldValue.serverTimestamp()
+            })
+        })
+        .then(()=>{
+            console.log("user added ")
+        })
+        .catch(err=>{
+            switch(err.code)
+            {
+                case "auth/email-already-in-use":
+                case "auth/invalid-user":
+                    setEmailError(err.message);
+                    break;
+                case "auth/weak-password":
+                    setPasswordError(err.message);
+                    break;        
+            }
+        })
+    }
+    }
+    const handleLogOut=()=>{
+        firebaseApp.auth().signOut();
+    }
+
+    const authListener=()=>{
+        firebaseApp.auth().onAuthStateChanged((user)=>{
+             if(user)
+             {
+                 clearInputs();
+                 setUserLogin(user);
+
+
+             }
+             else
+             {
+                 setUserLogin("");
+             }   
+        })
+    }
+
+    useEffect(()=>{
+        authListener();
+    },[])
+
 
     const spanStyle={
         cursor:"pointer",
@@ -40,15 +124,15 @@ function Login() {
             <div className="imageelement"></div>
             <form>
 
-                <input type="text" placeholder="Enter Your Display Name" />
+               {!hasAccount && <><input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Enter Your Display Name" /></>}
 
-                <input placeholder="Enter Your Email Id" type="text"/>
+                <input placeholder="Enter Your Email Id" type="text" value={email} onChange={e=>setEmail(e.target.value)}/>
 
-                <input placeholder="Enter Your Password" type="password"/>    
-                {!hasAccount ? <><button type="submit" >Sign Up</button>
+                <input placeholder="Enter Your Password" type="password" value={password} onChange={e=>setPassword(e.target.value)}/>    
+                {!hasAccount ? <><button type="submit" onClick={e=>handleSignUp(e)} >Sign Up</button>
                 <p>Have an Account ? <span style={spanStyle} onClick={()=>setHasAccount(!hasAccount)}>Sign In</span></p></>
                 :<>
-                <button type="submit" >Sign In</button>
+                <button type="submit" onClick={e=>handleLogin(e)} >Sign In</button>
                 <p>Don't Have an Account ? <span style={spanStyle} onClick={()=>setHasAccount(!hasAccount)}>Sign Up</span></p>
                 </>
                 }        
