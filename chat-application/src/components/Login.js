@@ -110,8 +110,8 @@ function Login() {
 
     const spanStyle={
         cursor:"pointer",
-        textDecoration:"underline",
-        textDecorationColor:"white"
+       
+        color:"#FEF3C7"
         
     }
 
