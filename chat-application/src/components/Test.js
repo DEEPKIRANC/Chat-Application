@@ -8,11 +8,31 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider";
+import {db} from "../firebase";
 
 function Test() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
     const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
+    
+    useEffect(()=>{
+
+        if(selectedChat.length>0)
+        {
+            db.collection("groups").doc(selectedChat[0].id).collection("messages").orderBy("sentAt","asc").onSnapshot((snapshot)=>{
+                const messagesArr=snapshot.docs.map(doc=>{
+                    return {...doc.data(),messageId:doc.id}
+                })
+               // console.log(messagesArr);
+                setMessages(messagesArr);
+            })
+        }
+     
+        
+     
+    }
+    ,[selectedChat,setMessages])
+
 
   
 
