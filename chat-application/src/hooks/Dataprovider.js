@@ -7,6 +7,7 @@ const DataProvider =(props)=>{
 const [userlogin,setUserLogin]=useState("");
 const [selectedChat,setSelectedChat]=useState([]);
 const [groups,setGroups]=useState([]);
+const [messages,setMessages]=useState([]);
 
 useEffect(()=>{
 
@@ -22,7 +23,7 @@ useEffect(()=>{
 
 },[])
 
-return <DataContext.Provider value={[userlogin,setUserLogin,selectedChat,setSelectedChat,groups,setGroups]}>
+return <DataContext.Provider value={[userlogin,setUserLogin,selectedChat,setSelectedChat,groups,setGroups,messages,setMessages]}>
 {props.children}
 
 </DataContext.Provider>
