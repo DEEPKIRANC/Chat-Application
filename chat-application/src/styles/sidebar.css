@@ -31,6 +31,7 @@
 .sidebar__component > .header > p
 {
     flex:1;
+    margin-top:-10px;
 }
 
 @media screen and (max-width:600px)
@@ -62,4 +63,9 @@
 {
     display: none;
     width:0px;
+}
+
+.MuiButton-label
+{
+    color:#3f51b5;
 }

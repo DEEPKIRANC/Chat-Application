@@ -1,6 +1,16 @@
 import React,{useState,useEffect,useContext} from 'react'
+
 import { Avatar , IconButton } from "@material-ui/core";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddIcon from '@material-ui/icons/Add';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 import "../styles/sidebar.css"
 import {db} from "../firebase";
 import SidebarChat from './sidebar__chat';
@@ -10,7 +20,18 @@ function Sidebar() {
     const [userlogin,,,]=useContext(DataContext);
 
     const [userDetails,setUserDetails]=useState('');
-    useEffect(()=>{
+    
+    const [open, setOpen] = useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+    
+    
+      useEffect(()=>{
         if(userlogin)
         {
             db.collection("users").doc(userlogin.uid).get().then(snapshot=>
@@ -30,10 +51,52 @@ function Sidebar() {
                 <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
                 <p><span className="statusColor"></span>{userlogin && <>{userDetails.status}</>}</p>
                 <IconButton>
-                    <ExitToAppIcon onClick={handleLogOut} style={{color:"white"}} />
+                <AddIcon onClick={handleClickOpen} style={{color:"white",marginTop:"-15px"}} />    
+                </IconButton>    
+                
+                <IconButton>
+                    <ExitToAppIcon onClick={handleLogOut} style={{color:"white",marginTop:"-15px"}} />
                 </IconButton>
             </div>
             <SidebarChat/>
+
+            {/*modal code*/}
+
+            <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add New Group</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter Group Name and Description
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Group Name"
+            type="text"
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            id="name"
+            label="Description"
+            type="text"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
         </div>
     )
 }

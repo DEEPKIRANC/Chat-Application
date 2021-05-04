@@ -120,7 +120,7 @@ function Login() {
             
             <div className="inner_div">
             <div className="imageelement"></div>
-            <form>
+            <form className="loginform">
 
                {!hasAccount && <><input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Enter Your Display Name" /></>}
 
