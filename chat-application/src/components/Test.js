@@ -67,8 +67,9 @@ function Test() {
             <p>
                 <span className="name">{message.senderName}</span>
                 {message.message}
-                <span className="timestamp">{message.sentAt.toDate().toString().trim().substring(0,28)}</span>
             </p>
+            <span className="timestamp">{message.sentAt.toDate().toString().trim().substring(0,28)}</span>
+            
         </div>
 )) :null
 

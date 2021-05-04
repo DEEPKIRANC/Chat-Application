@@ -37,6 +37,16 @@ function Chatbox() {
         setInput("");
     }
 
+
+    const generateLightColorHex=()=> {
+        let color = "#";
+        for (let i = 0; i < 3; i++)
+          color += ("0" + Math.floor(((1 + Math.random()) * Math.pow(16, 2)) / 2).toString(16)).slice(-2);
+       
+          return color;
+      }
+
+
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
    
    if(!windowSize)
@@ -66,12 +76,14 @@ function Chatbox() {
 
                 messages.length>0?messages.map(message=>(
 
-                    <div key={message.messageId} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>
-                    <p>
-                        <span className="name">{message.senderName}</span>
-                        {message.message}
+                    
+                      <div key={message.messageId} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>  
+                            <p>
+                                <span className="name" style={`${message.senderId!==userlogin?.uid}` && {color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
+                                {message.message}
+                            </p>
                         <span className="timestamp">{message.sentAt.toDate().toString().trim().substring(0,28)}</span>
-                    </p>
+                    
                   </div>
                 )) :null
        

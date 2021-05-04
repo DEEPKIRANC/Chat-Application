@@ -64,7 +64,7 @@
     color:white;
     width:fit-content;
     position:relative;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .chat_message span.name
@@ -75,10 +75,12 @@
     font-weight:bold;
 }
 
-.chat_message span.timestamp
+.timestamp
 {
-    margin-left:10px;
-    font-size: x-small;
+   position:absolute;
+   font-size: x-small;
+   right:0;
+   opacity:0.7;
 }
 
 .sender
