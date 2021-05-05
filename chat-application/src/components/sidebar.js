@@ -16,18 +16,37 @@ import {db} from "../firebase";
 import SidebarChat from './sidebar__chat';
 import {DataContext} from "../hooks/Dataprovider";
 import {firebaseApp} from "../firebase";
+import firebase from "firebase";
 function Sidebar() {
     const [userlogin,,,]=useContext(DataContext);
 
     const [userDetails,setUserDetails]=useState('');
     
     const [open, setOpen] = useState(false);
+
+    const [groupName,setGroupName]=useState("");
+    const [groupDesc,setGroupDesc]=useState("");
+    
     const handleClickOpen = () => {
         setOpen(true);
       };
     
-      const handleClose = () => {
-        setOpen(false);
+      const handleClose = (e) => {
+        e.preventDefault();
+        if(groupName.trim().length > 0 && groupDesc.trim().length>0)
+        {
+          db.collection("groups").add({
+            name:groupName,
+            description:groupDesc,
+            createdAt:firebase.firestore.FieldValue.serverTimestamp()
+          })
+          setOpen(false);
+        }
+        else
+        {
+          alert("Group Name or Description can't be empty!");
+        }
+       
       };
     
     
@@ -75,9 +94,12 @@ function Sidebar() {
           <TextField
             autoFocus
             margin="dense"
+            value={groupName}
+            onChange={(e)=>setGroupName(e.target.value)}
             id="name"
             label="Group Name"
             type="text"
+            required="required"
             fullWidth
           />
           <TextField
@@ -85,14 +107,14 @@ function Sidebar() {
             id="name"
             label="Description"
             type="text"
+            value={groupDesc}
+            onChange={(e)=>setGroupDesc(e.target.value)}
+            required="required"
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={(e)=>handleClose(e)} color="primary">
             Add
           </Button>
         </DialogActions>

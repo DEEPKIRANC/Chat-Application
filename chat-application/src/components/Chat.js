@@ -14,6 +14,7 @@ function Chat(props) {
     const {key,id,name}=props;
     const [,,selectedChat,setSelectedChat,groups,]=useContext(DataContext);
     const [messageList,setMessageList]=useState([]);
+    const [defaultMessage,setDefaultMessage]=useState("Start Conversion");
     
 useEffect(()=>{
     
@@ -25,7 +26,7 @@ useEffect(()=>{
     })
 
     setRandomText(Math.floor(Math.random() * 5000));
-},[])
+},[groups])
 
 
 const handleClick=()=>{
@@ -48,7 +49,7 @@ const mobileHrStyle={color:"white",height:"2px",opacity:"0.2"}
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
            <div className="channel_info"> 
                 <h3>{name}</h3>
-                <p>{messageList.length>0 &&  messageList[0].message.substring(0,30)+"..."}</p>
+                <p>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+"..." : defaultMessage }</p>
             </div>
             <span>{messageList.length>0 && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
         </div>
@@ -64,7 +65,7 @@ const mobileHrStyle={color:"white",height:"2px",opacity:"0.2"}
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
            <div className="channel_info"> 
                 <h3>{name}</h3>
-                <p>{messageList.length>0 &&  messageList[0].senderName+":"+messageList[0].message.substring(0,10)+"..."}</p>
+                <p>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+"..." : defaultMessage}</p>
             </div>
             <span>{messageList.length>0 && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
         
