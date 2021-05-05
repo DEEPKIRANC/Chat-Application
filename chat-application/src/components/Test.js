@@ -23,7 +23,7 @@ function Test() {
         
         randomdiv.current?.scrollIntoView({behaviour:"smooth"});
 
-    },[])
+    },[messages])
 
     useEffect(()=>{
 
