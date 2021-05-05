@@ -51,6 +51,14 @@
     padding:1.5rem;
 }
 
+.chatbody::-webkit-scrollbar
+{
+    display: none;
+    width:0px;
+}
+
+
+
 .chat_message
 {
     border-radius:10px;

@@ -7,11 +7,13 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider"
 import {db} from "../firebase";
+import firebase from "firebase";
 import "../styles/chatbox.css"
 function Chatbox() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
    // const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
+    const [currentUser,setCurrentUser]=useState('');
 
     useEffect(()=>{
 
@@ -31,8 +33,33 @@ function Chatbox() {
     }
     ,[selectedChat,setMessages])
 
+    useEffect(()=>{
+        if(userlogin)
+        {
+            db.collection("users").doc(userlogin.uid).get().then(snapshot=>
+                  setCurrentUser(snapshot.data())  
+            )
+
+        }
+    },[userlogin])
+
     const sendMessage=(e)=>{
         e.preventDefault();
+
+        if(input.trim().length>0 && selectedChat.length>0)
+        {
+            db.collection("groups").doc(selectedChat[0].id).collection("messages").add({
+                message:input,
+                senderId:userlogin.uid,
+                senderName:currentUser.display_name,
+                sentAt:firebase.firestore.FieldValue.serverTimestamp()
+            })
+        }
+        else
+        {
+            alert("You can't send empty text messages!");
+        }
+
         console.log("You have typed =>>>" + input);
         setInput("");
     }
@@ -82,7 +109,7 @@ function Chatbox() {
                                 <span className="name" style={`${message.senderId!==userlogin?.uid}` && {color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                                 {message.message}
                             </p>
-                        <span className="timestamp">{message.sentAt.toDate().toString().trim().substring(0,28)}</span>
+                        <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(0,28)}</span>
                     
                   </div>
                 )) :null

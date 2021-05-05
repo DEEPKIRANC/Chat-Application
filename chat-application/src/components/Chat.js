@@ -12,7 +12,7 @@ function Chat(props) {
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
     const [randomText,setRandomText]=useState("");
     const {key,id,name}=props;
-    const [,,selectedChat,setSelectedChat,groups,]=useContext(DataContext);
+    const [,,selectedChat,setSelectedChat,groups]=useContext(DataContext);
     const [messageList,setMessageList]=useState([]);
     const [defaultMessage,setDefaultMessage]=useState("No Conversations Yet!");
     
@@ -51,7 +51,7 @@ const mobileHrStyle={color:"white",height:"2px",opacity:"0.2"}
                 <h3>{name}</h3>
                 <p>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+"..." : defaultMessage }</p>
             </div>
-            <span>{messageList.length>0 && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
+            <span>{messageList.length>0 && messageList[0].sentAt!==null && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
         </div>
         <hr style={mobileHrStyle} />
         </div>
@@ -67,7 +67,7 @@ const mobileHrStyle={color:"white",height:"2px",opacity:"0.2"}
                 <h3>{name}</h3>
                 <p>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+"..." : defaultMessage}</p>
             </div>
-            <span>{messageList.length>0 && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
+            <span>{messageList.length>0 && messageList[0].sentAt!==null && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
         
             </div>
         <hr style={hrstyle} />
