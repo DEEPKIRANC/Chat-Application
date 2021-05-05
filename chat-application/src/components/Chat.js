@@ -14,7 +14,7 @@ function Chat(props) {
     const {key,id,name}=props;
     const [,,selectedChat,setSelectedChat,groups,]=useContext(DataContext);
     const [messageList,setMessageList]=useState([]);
-    const [defaultMessage,setDefaultMessage]=useState("Start Conversion");
+    const [defaultMessage,setDefaultMessage]=useState("No Conversations Yet!");
     
 useEffect(()=>{
     
