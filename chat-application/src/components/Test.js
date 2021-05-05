@@ -9,11 +9,13 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider";
 import {db} from "../firebase";
+import firebase from "firebase";
 
 function Test() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
-    const [boolval,setBoolVal]=useState(false);
+    const [currentUser,setCurrentUser]=useState("");
     const [input,setInput]=useState("");
+
     
     useEffect(()=>{
 
@@ -34,13 +36,49 @@ function Test() {
     ,[selectedChat,setMessages])
 
 
-  
+    useEffect(()=>{
+        if(userlogin)
+        {
+            db.collection("users").doc(userlogin.uid).get().then(snapshot=>
+                  setCurrentUser(snapshot.data())  
+            )
+
+        }
+    },[userlogin])
 
     const sendMessage=(e)=>{
         e.preventDefault();
+
+        if(input.trim().length>0 && selectedChat.length>0)
+        {
+            db.collection("groups").doc(selectedChat[0].id).collection("messages").add({
+                message:input,
+                senderId:userlogin.uid,
+                senderName:currentUser.display_name,
+                sentAt:firebase.firestore.FieldValue.serverTimestamp()
+            })
+        }
+        else
+        {
+            alert("You can't send empty text messages!");
+        }
+
         console.log("You have typed =>>>" + input);
         setInput("");
     }
+
+    const generateLightColorHex=()=> {
+        let color = "#";
+        for (let i = 0; i < 3; i++)
+          color += ("0" + Math.floor(((1 + Math.random()) * Math.pow(16, 2)) / 2).toString(16)).slice(-2);
+       
+          return color;
+      }
+
+  
+
+   
+    
     return (
         <div style={{display:"flex",justifyContent:"flex-start",height:"90vh",width:"90vw"}}>
         <div className="chatbox__body">
@@ -65,10 +103,10 @@ function Test() {
 
             <div key={message.messageId} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>
             <p>
-                <span className="name">{message.senderName}</span>
+                <span className="name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                 {message.message}
             </p>
-            <span className="timestamp">{message.sentAt.toDate().toString().trim().substring(0,28)}</span>
+            <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
             
         </div>
 )) :null

@@ -14,6 +14,7 @@ function Chatbox() {
    // const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
     const [currentUser,setCurrentUser]=useState('');
+    
 
     useEffect(()=>{
 
@@ -109,9 +110,10 @@ function Chatbox() {
                                 <span className="name" style={`${message.senderId!==userlogin?.uid}` && {color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                                 {message.message}
                             </p>
-                        <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(0,28)}</span>
+                        
                     
-                  </div>
+                      <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
+                 </div>   
                 )) :null
        
               }
