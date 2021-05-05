@@ -33,6 +33,10 @@ function Login() {
         firebaseApp
         .auth()
         .signInWithEmailAndPassword(email,password)
+        .then(()=>{
+            console.log("user added ");
+           
+        })
         .catch(err=>{
             switch(err.code)
             {
@@ -50,6 +54,7 @@ function Login() {
                     break;        
             }
         })
+        alert("You are being logged in!");
     }
 
 
@@ -73,7 +78,8 @@ function Login() {
             })
         })
         .then(()=>{
-            console.log("user added ")
+            console.log("user added ");
+           
         })
         .catch(err=>{
             switch(err.code)
@@ -91,6 +97,7 @@ function Login() {
                     break;        
             }
         })
+        alert("You are being logged in!");
     }
     }
     

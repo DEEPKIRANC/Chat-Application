@@ -47,9 +47,9 @@ const mobileHrStyle={color:"white",height:"2px",opacity:"0.2"}
         <div>
         <div className="chats" onClick={handleClick}>
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
-           <div className="channel_info"> 
-                <h3>{name}</h3>
-                <p>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+"..." : defaultMessage }</p>
+           <div className="chatlist_chat_info"> 
+                <h4>{name}</h4>
+                <p style={{fontSize:"0.80rem"}}>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+".." : defaultMessage }</p>
             </div>
             <span>{messageList.length>0 && messageList[0].sentAt!==null && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
         </div>
@@ -63,9 +63,9 @@ const mobileHrStyle={color:"white",height:"2px",opacity:"0.2"}
         return (<div>
         <div className="chats" onClick={handleClick}>
             <Avatar src={`https://avatars.dicebear.com/api/human/${randomText}.svg`}/>
-           <div className="channel_info"> 
-                <h3>{name}</h3>
-                <p>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+"..." : defaultMessage}</p>
+           <div className="chatlist_chat_info"> 
+                <h4>{name}</h4>
+                <p style={{fontSize:".8rem"}}>{messageList.length>0 ? messageList[0].senderName+" : "+messageList[0].message.substring(0,25)+".." : defaultMessage}</p>
             </div>
             <span>{messageList.length>0 && messageList[0].sentAt!==null && messageList[0].sentAt.toDate().toString().substring(0,10)}</span>
         

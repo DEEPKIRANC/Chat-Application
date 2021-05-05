@@ -49,6 +49,10 @@ function Sidebar() {
        
       };
     
+    const handleCloseDialog=()=>{
+      setOpen(false);
+    }  
+
     
       useEffect(()=>{
         if(userlogin)
@@ -61,7 +65,15 @@ function Sidebar() {
     },[userlogin])
 
     const handleLogOut=()=>{
-        firebaseApp.auth().signOut();
+        var answer=window.confirm("Do you wish to log out?");
+        if(answer)
+        {
+          
+          firebaseApp.auth().signOut();
+          
+        }
+
+        
     }
     return (
         <div className="sidebar__component">
@@ -116,6 +128,9 @@ function Sidebar() {
         <DialogActions>
           <Button onClick={(e)=>handleClose(e)} color="primary">
             Add
+          </Button>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>

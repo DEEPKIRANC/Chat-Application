@@ -1,4 +1,4 @@
-import React ,{useState,useEffect,useContext} from 'react'
+import React ,{useState,useEffect,useContext,useRef} from 'react'
 import {useMediaQuery} from "react-responsive";
 import EditIcon from '@material-ui/icons/Edit';
 import MoreVert from '@material-ui/icons/MoreVert';
@@ -14,7 +14,11 @@ function Chatbox() {
    // const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
     const [currentUser,setCurrentUser]=useState('');
-    
+    const scrollref=useRef();
+    useEffect(()=>{
+      
+        scrollref.current?.scrollIntoView({behaviour:"smooth"});
+    },[messages])
 
     useEffect(()=>{
 
@@ -89,7 +93,7 @@ function Chatbox() {
           
                 <Avatar src="https://avatars.dicebear.com/api/human/123.svg" style={{width:'3rem',height:'3rem'}}  />
             <div className="channel_info"> 
-                <h3>{selectedChat.length>0?selectedChat[0].name:null}</h3>
+                <h4>{selectedChat.length>0?selectedChat[0].name:null}</h4>
                 <p>{selectedChat.length>0?selectedChat[0].description:null}</p>
             </div>
                 <IconButton>
@@ -117,6 +121,7 @@ function Chatbox() {
                 )) :null
        
               }
+              <div ref={scrollref}></div>
           </div>    
           <div className="chat__footer">
               <IconButton>

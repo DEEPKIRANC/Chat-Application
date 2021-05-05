@@ -7,14 +7,14 @@
 {
     --secondary-background-color:#22303C;
 }
-.chatbox__body
+.mobile_chatbox__body
 {
     flex:1;
     height:100%;
     display: flex;
     flex-direction: column;
 }
-.header
+.mobile_header
 {
     width:100%;
     flex:0.10;
@@ -25,7 +25,7 @@
     padding:0rem 1rem;
     align-items: center;
 }
-.chatbox__body .channel_info
+.mobile_chatbox__body .mobile_channel_info
 {
     flex:1;
     display:flex;
@@ -37,16 +37,16 @@
     align-items: flex-start;
 }
 
-.channel_info h3
+.mobile_channel_info h3
 {
     font-size: 0.85rem;
 }
-.channel_info p
+.mobile_channel_info p
 {
     font-size:0.7rem;
 }
 
-.chatbody
+.mobile_chatbody
 {
     flex:0.83;
     background-image:url("../chat_background1.jpg");
@@ -56,14 +56,14 @@
     padding:1.80rem;
 }
 
-.chatbody::-webkit-scrollbar
+.mobile_chatbody::-webkit-scrollbar
 {
     display: none;
     width:0px;
 }
 
 
-.chat_message
+.mobile_chat_message
 {
     border-radius:10px;
     background:var(--secondary-background-color);
@@ -76,7 +76,7 @@
     max-width:250px;
 }
 
-.chat_message span.name
+.mobile_chat_message span.mobile_name
 {
     position: absolute;
     top:-40px;
@@ -84,7 +84,7 @@
     font-weight:bold;
 }
 
-.timestamp
+.mobile_timestamp
 {
    position:absolute;
    font-size: x-small;
@@ -93,14 +93,14 @@
    opacity:0.7;
 }
 
-.sender
+.mobile_sender
 {
     background-color: rgb(85, 82, 82);
     margin-left:auto;
    
 }
 
-.chat__footer
+.mobile_chat__footer
 {
     flex:0.07;
     background-color: #22303C;
@@ -109,14 +109,14 @@
     justify-content: space-between;
     align-items: center;
 }
-.chat__footer > form
+.mobile_chat__footer > form
 {
     flex:1;
     display: flex;
     
 }
 
-.chat__footer > form > input
+.mobile_chat__footer > form > input
 {
     flex:1;
     
@@ -126,12 +126,12 @@
     outline:none;
 }
 
-.chat__footer > form > button
+.mobile_chat__footer > form > button
 {
     display: none;
 }
 
-.chat_message,.sender p
+.mobile_chat_message,.mobile_sender p
 {
     font-size:0.80rem;
 }

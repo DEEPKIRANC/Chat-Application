@@ -81,11 +81,11 @@ function Test() {
     
     return (
         <div style={{display:"flex",justifyContent:"flex-start",height:"90vh",width:"90vw"}}>
-        <div className="chatbox__body">
-          <div className="header">
+        <div className="mobile_chatbox__body">
+          <div className="mobile_header">
                 <Link to="/"><ArrowBackIcon style={{color:"white"}}/></Link>
                 <Avatar src="https://avatars.dicebear.com/api/human/123.svg" style={{width:'2rem',height:'2rem'}}  />
-            <div className="channel_info"> 
+            <div className="mobile_channel_info"> 
             <h3>{selectedChat.length>0?selectedChat[0].name:null}</h3>
                 <p>{selectedChat.length>0?selectedChat[0].description.substring(0,20)+"...":null}</p>
             </div>
@@ -96,24 +96,24 @@ function Test() {
                     <MoreVert style={{color:"white"}}/>
                 </IconButton>                
           </div>
-          <div className="chatbody">
+          <div className="mobile_chatbody">
           {
 
             messages.length>0?messages.map(message=>(
 
-            <div key={message.messageId} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>
+            <div key={message.messageId} className={`mobile_chat_message ${message.senderId===userlogin?.uid && `mobile_sender`}`}>
             <p>
-                <span className="name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
+                <span className="mobile_name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                 {message.message}
             </p>
-            <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
+            <span className="mobile_timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
             
         </div>
 )) :null
 
 }
           </div>
-          <div className="chat__footer">
+          <div className="mobile_chat__footer">
               <IconButton>
                 <InsertEmoticonIcon style={{color:"white",marginBottom:"20px"}}/>
               </IconButton>
