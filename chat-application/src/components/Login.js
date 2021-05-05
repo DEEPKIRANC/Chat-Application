@@ -40,9 +40,13 @@ function Login() {
                 case "auth/user-disabled":
                 case "auth/user-not-found":
                     setEmailError(err.message);
+                    alert(err.message);
+                    clearInputs();   
                     break;
                 case "auth/wrong-password":
                     setPasswordError(err.message);
+                    alert(err.message);
+                    clearInputs();
                     break;        
             }
         })
@@ -77,9 +81,13 @@ function Login() {
                 case "auth/email-already-in-use":
                 case "auth/invalid-user":
                     setEmailError(err.message);
+                    alert(err.message);
+                    clearInputs();
                     break;
                 case "auth/weak-password":
                     setPasswordError(err.message);
+                    alert(err.message);
+                    clearInputs();
                     break;        
             }
         })
@@ -125,8 +133,9 @@ function Login() {
                {!hasAccount && <><input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Enter Your Display Name" /></>}
 
                 <input placeholder="Enter Your Email Id" type="text" value={email} onChange={e=>setEmail(e.target.value)}/>
-
+                
                 <input placeholder="Enter Your Password" type="password" value={password} onChange={e=>setPassword(e.target.value)}/>    
+               
                 {!hasAccount ? <><button type="submit" onClick={e=>handleSignUp(e)} >Sign Up</button>
                 <p>Have an Account ? <span style={spanStyle} onClick={()=>setHasAccount(!hasAccount)}>Sign In</span></p></>
                 :<>
