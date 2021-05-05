@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react';
+import React,{useState,useEffect,useContext,useRef} from 'react';
 import {Link} from "react-router-dom";
 import "../styles/mobiletest.css";
 import EditIcon from '@material-ui/icons/Edit';
@@ -15,8 +15,16 @@ function Test() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
     const [currentUser,setCurrentUser]=useState("");
     const [input,setInput]=useState("");
-
+    const randomdiv=useRef();
     
+
+    useEffect(()=>{
+
+        
+        randomdiv.current?.scrollIntoView({behaviour:"smooth"});
+
+    },[])
+
     useEffect(()=>{
 
         if(selectedChat.length>0)
@@ -112,6 +120,7 @@ function Test() {
 )) :null
 
 }
+    <div ref={randomdiv}></div>
           </div>
           <div className="mobile_chat__footer">
               <IconButton>
