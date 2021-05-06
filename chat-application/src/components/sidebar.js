@@ -12,6 +12,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+import AudiotrackIcon from '@material-ui/icons/Audiotrack';
+
 
 import "../styles/sidebar.css"
 import {db} from "../firebase";
@@ -26,8 +29,12 @@ function Sidebar() {
     
     const [open, setOpen] = useState(false);
 
+    const [openStatusModal,setModal]=useState(false);
+    const [openDP,setOpenDP]=useState(false);
+
     const [groupName,setGroupName]=useState("");
     const [groupDesc,setGroupDesc]=useState("");
+    const [status,setStatus]=useState("online");
 
     const [userdropdown,setUserdropdown]=useState(false);
     
@@ -62,11 +69,13 @@ function Sidebar() {
         if(userlogin)
         {
             db.collection("users").doc(userlogin.uid).get().then(snapshot=>
-                  setUserDetails(snapshot.data())  
+                  
+              setUserDetails(snapshot.data())
+                    
             )
-
+              console.log("Count this");
         }
-    },[userlogin])
+    },[userlogin,setUserDetails])
 
     const handleLogOut=()=>{
         var answer=window.confirm("Do you wish to log out?");
@@ -81,12 +90,34 @@ function Sidebar() {
  
         
     }
+
+    
+
+    const closeStatusModal=(e)=>{
+      e.preventDefault();
+      db.collection("users").doc(userlogin.uid).update({
+
+        status:status
+      })
+      setUserDetails(prev=>{return {...prev,status:status}});
+      setModal(false);
+    }
+
+    const handleDisplayPicture=(e)=>{
+      console.log("Hello");
+    }
     return (
         <div className="sidebar__component">
             <div className="header">
                 <Avatar src="https://avatars.dicebear.com/api/human/1234.svg" style={{width:'3rem',height:'3rem'}} />
                 <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
-                <p><span className="statusColor"></span>{userlogin && <>{userDetails.status}</>}</p>
+                <div className="status__section">
+                  {userlogin && userDetails.status==="online" && <span className="statusColor" style={{marginTop:"0px",marginRight:"10px"}}></span>}
+                  {userlogin && userDetails.status==="inactive" && <Brightness3Icon style={{display:"inline",color:"#ffd700"}}/>}
+                  {userlogin && userDetails.status==="busy" && <span className="busy" style={{marginTop:"0px",marginRight:"10px"}}></span>}
+                  {userlogin && userDetails.status==="chilling" && <AudiotrackIcon style={{display:"inline",color:"#00ffff"}}/>}
+                  <p>{userlogin && <>{userDetails.status}</>}</p>
+                </div>
                 <IconButton>
                 <AddIcon onClick={handleClickOpen} style={{color:"white",marginTop:"-15px"}} />    
                 </IconButton>    
@@ -105,11 +136,44 @@ function Sidebar() {
            </IconButton>
            <div className="user__dropdown">
            <ul>
-             <li>Change Status</li>
-             <li>Change Display Picture</li>
-             <li><button onClick={handleLogOut}>Log Out</button></li>
+             <li><span onClick={()=>setModal(true)}>Change Status</span></li>
+
+             <li><span>Change Display Picture</span></li>
+             <li><span onClick={handleLogOut}>Log Out</span></li>
            </ul>
          </div>
+
+        {/*Status Dialog box*/}
+
+         <Dialog
+        open={openStatusModal}
+        onClose={closeStatusModal}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogContent>
+          <DialogContentText>
+            Select a status 
+          </DialogContentText>
+          <select name="status" style={{width:"100%",margin:"auto"}} value={status} onChange={(e)=>setStatus(e.target.value)} >
+            <option value="online">Online</option>
+            <option value="inactive">Inactive</option>
+            <option value="busy">Busy</option>
+            <option value="chilling">Chilling</option>
+          </select>
+        </DialogContent> 
+        <Button onClick={(e)=>closeStatusModal(e)} color="primary">
+            Set Status
+          </Button>       
+      </Dialog>
+
+        {/*Display picture box*/}
+        <Dialog
+        open={openDP}
+        onClose={handleDisplayPicture}
+        aria-labelledby="form-dialog-title"
+      >
+
+        </Dialog>
       </>
            }
                 

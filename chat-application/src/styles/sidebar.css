@@ -29,10 +29,13 @@
     position:relative;
 }
 
-.sidebar__component > .header > p
+.sidebar__component > .header > .status__section
 {
     flex:1;
-    margin-top:-10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
 }
 
 @media screen and (max-width:600px)
@@ -49,7 +52,16 @@
     width:10px;
     border-radius: 50%;
     background-color: limegreen;
-    display: inline-block;
+    display: inline;
+    
+}
+.busy
+{
+    height:10px;
+    width:10px;
+    border-radius: 50%;
+    background-color: red;
+    display: inline;
     margin-right: 10px;
 }
 
@@ -78,7 +90,7 @@
 {
     width:fit-content;
     height:auto;
-    padding:0.5rem;
+    
     background-color: var(--secondary-background-color);
     position: absolute;
     top:110%;
@@ -95,6 +107,7 @@
 }
 .user__dropdown li
 {
+    padding:0.5rem;
     display: block;
     cursor: pointer;
     transition: all 0.2s;
@@ -109,22 +122,4 @@
 background-color:grey ;
 }
 
-.user__dropdown li:not(:last-child)
-{
-    margin-bottom: 20px;
-}
-.user__dropdown ul li button
-{
-    color:inherit;
-    background-color: var(--secondary-background-color);
-    border:none;
-    outline: none;
-    font-size: inherit;
-    font-family: inherit;
-    width:100%;
-    cursor:pointer;
-}
-.user__dropdown ul li button:hover
-{
-    background-color: grey;
-}
+
