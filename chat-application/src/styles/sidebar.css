@@ -26,6 +26,7 @@
     justify-content: space-between;
     align-items: center;
     padding:0rem 1rem;
+    position:relative;
 }
 
 .sidebar__component > .header > p
@@ -68,4 +69,62 @@
 .MuiButton-label
 {
     color:#3f51b5;
+}
+.expandIcon
+{
+    position:relative;
+}
+.user__dropdown
+{
+    width:fit-content;
+    height:auto;
+    padding:0.5rem;
+    background-color: var(--secondary-background-color);
+    position: absolute;
+    top:110%;
+    right:10px;
+    z-index: 999;
+    color:white;
+
+
+}
+
+.user__dropdown ul
+{
+    list-style: none;
+}
+.user__dropdown li
+{
+    display: block;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: small;
+    font-weight:normal;
+    font-family: 'Nunito';
+    
+}
+.user__dropdown li:hover
+{
+    
+background-color:grey ;
+}
+
+.user__dropdown li:not(:last-child)
+{
+    margin-bottom: 20px;
+}
+.user__dropdown ul li button
+{
+    color:inherit;
+    background-color: var(--secondary-background-color);
+    border:none;
+    outline: none;
+    font-size: inherit;
+    font-family: inherit;
+    width:100%;
+    cursor:pointer;
+}
+.user__dropdown ul li button:hover
+{
+    background-color: grey;
 }

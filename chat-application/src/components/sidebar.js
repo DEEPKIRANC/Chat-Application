@@ -10,6 +10,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import "../styles/sidebar.css"
 import {db} from "../firebase";
@@ -26,6 +28,8 @@ function Sidebar() {
 
     const [groupName,setGroupName]=useState("");
     const [groupDesc,setGroupDesc]=useState("");
+
+    const [userdropdown,setUserdropdown]=useState(false);
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -73,6 +77,8 @@ function Sidebar() {
           
         }
 
+
+ 
         
     }
     return (
@@ -85,9 +91,28 @@ function Sidebar() {
                 <AddIcon onClick={handleClickOpen} style={{color:"white",marginTop:"-15px"}} />    
                 </IconButton>    
                 
-                <IconButton>
-                    <ExitToAppIcon onClick={handleLogOut} style={{color:"white",marginTop:"-15px"}} />
-                </IconButton>
+                {!userdropdown &&  <IconButton>
+                
+                <ExpandMoreIcon onClick={()=>setUserdropdown(prev=>!prev)} style={{color:"white",marginTop:"-15px"}}/>
+                
+            </IconButton>}
+
+
+               {userdropdown && <> <IconButton>
+                
+               <ExpandLessIcon className="expand__icon" onClick={()=>setUserdropdown(prev=>!prev)} style={{color:"white",marginTop:"-15px"}}/>
+               
+           </IconButton>
+           <div className="user__dropdown">
+           <ul>
+             <li>Change Status</li>
+             <li>Change Display Picture</li>
+             <li><button onClick={handleLogOut}>Log Out</button></li>
+           </ul>
+         </div>
+      </>
+           }
+                
             </div>
             <SidebarChat/>
 
