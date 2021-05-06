@@ -88,7 +88,7 @@ function Test() {
    
     
     return (
-        <div style={{display:"flex",justifyContent:"flex-start",height:"90vh",width:"90vw"}}>
+        <div style={{display:"flex",justifyContent:"flex-start",height:"100vh",width:"100vw"}}>
         <div className="mobile_chatbox__body">
           <div className="mobile_header">
                 <Link to="/"><ArrowBackIcon style={{color:"white"}}/></Link>

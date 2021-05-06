@@ -85,6 +85,8 @@
 {
     .inner_div{
         flex-direction: column;
+        height:100vh;
+        width:100vw;
     }
     .imageelement{
         height:150px;
