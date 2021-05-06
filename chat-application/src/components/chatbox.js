@@ -4,6 +4,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import MoreVert from '@material-ui/icons/MoreVert';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider"
 import {db} from "../firebase";
@@ -116,7 +117,7 @@ function Chatbox() {
                     <EditIcon style={{color:"white"}}/>
                 </IconButton>    
                 <IconButton>
-                    <MoreVert onClick={deleteGroup} style={{color:"white"}}/>
+                    <DeleteForeverIcon onClick={deleteGroup} style={{color:"white"}}/>
                 </IconButton>                
           </div>
           <div className="chatbody">

@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import MoreVert from '@material-ui/icons/MoreVert';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider";
@@ -75,6 +76,25 @@ function Test() {
         setInput("");
     }
 
+
+    const deletegroup=()=>{
+        if(userlogin.uid===selectedChat[0].createdBy)
+        {
+
+        var confirm=window.confirm("Do you wish to delete this group permanently..?")
+        if(confirm)
+        {    
+        db.collection("groups").doc(selectedChat[0].id).delete()
+        }    
+        }
+        else
+        {
+            alert("You don't have Admin Access to delete this Group ! ");
+        }
+    }
+
+    
+
     const generateLightColorHex=()=> {
         let color = "#";
         for (let i = 0; i < 3; i++)
@@ -101,7 +121,7 @@ function Test() {
                     <EditIcon style={{color:"white"}}/>
                 </IconButton>    
                 <IconButton>
-                    <MoreVert style={{color:"white"}}/>
+                    <DeleteForeverIcon onClick={deletegroup} style={{color:"white"}}/>
                 </IconButton>                
           </div>
           <div className="mobile_chatbody">
