@@ -73,8 +73,7 @@
     position:relative;
     margin-bottom: 40px;
     font-size:small;
-    max-width:350px;
-    word-wrap: break-word;
+   
     
 }
 
@@ -83,19 +82,19 @@
     
     position:absolute;
     top:-20px;
-    font-size: small;
+    font-size: xx-small;
     font-weight:bold;
     margin-bottom: 15px;
 }
 
 .timestamp
 {
-    position:absolute;
-   opacity:0.7;
+    
+    opacity:0.7;
     right:0;
     font-size: xx-small;
-    min-width: 70px;
-   font-family: 'Nunito';
+    margin-left:15px;
+    font-family: 'Nunito';
 }
 
 

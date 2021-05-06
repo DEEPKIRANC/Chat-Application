@@ -111,13 +111,14 @@ function Chatbox() {
                     
                       <div key={message.messageId} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>  
                             <p>
-                                <span className="name" style={`${message.senderId!==userlogin?.uid}` && {color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
+                                <span className="name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                                 {message.message}
+                                <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
+                
                             </p>
                         
                     
-                      <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
-                 </div>   
+                       </div>   
                 )) :null
        
               }

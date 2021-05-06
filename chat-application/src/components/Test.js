@@ -113,8 +113,9 @@ function Test() {
             <p>
                 <span className="mobile_name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                 {message.message}
+                <span className="mobile_timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
+            
             </p>
-            <span className="mobile_timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
             
         </div>
 )) :null
