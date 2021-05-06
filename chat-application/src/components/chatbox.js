@@ -69,6 +69,22 @@ function Chatbox() {
         setInput("");
     }
 
+    const deleteGroup=()=>{
+        if(userlogin.uid===selectedChat[0].createdBy)
+        {
+
+        var confirm=window.confirm("Do you wish to delete this group permanently..?")
+        if(confirm)
+        {    
+        db.collection("groups").doc(selectedChat[0].id).delete()
+        }    
+        }
+        else
+        {
+            alert("You don't have Admin Access to delete this Group ! ");
+        }
+    }
+
 
     const generateLightColorHex=()=> {
         let color = "#";
@@ -100,7 +116,7 @@ function Chatbox() {
                     <EditIcon style={{color:"white"}}/>
                 </IconButton>    
                 <IconButton>
-                    <MoreVert style={{color:"white"}}/>
+                    <MoreVert onClick={deleteGroup} style={{color:"white"}}/>
                 </IconButton>                
           </div>
           <div className="chatbody">

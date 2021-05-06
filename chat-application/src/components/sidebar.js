@@ -49,9 +49,14 @@ function Sidebar() {
           db.collection("groups").add({
             name:groupName,
             description:groupDesc,
-            createdAt:firebase.firestore.FieldValue.serverTimestamp()
+            createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+            createdBy:userlogin.uid,
+            admin:userDetails.display_name
           })
+
           setOpen(false);
+          setGroupName("");
+          setGroupDesc("");
         }
         else
         {
@@ -62,6 +67,8 @@ function Sidebar() {
     
     const handleCloseDialog=()=>{
       setOpen(false);
+      setGroupName("");
+      setGroupDesc("");
     }  
 
     
