@@ -27,7 +27,7 @@ function Sidebar() {
     const [userlogin,,,]=useContext(DataContext);
 
     const [userDetails,setUserDetails]=useState('');
-    const [showprogress,setShowprogress]=useState(false);
+   
     const [error,setError]=useState("");
     const [open, setOpen] = useState(false);
 
@@ -169,6 +169,7 @@ function Sidebar() {
                 (blob) => {
                     // blob=compressed image
                     blob.name=selected.name;
+                    console.log(blob.name);
                     setImagefile(blob);
                 }
                     ,
@@ -180,7 +181,7 @@ function Sidebar() {
             }
 
        
-        setShowprogress(true);
+        
         setError("");
        
     }
@@ -267,9 +268,9 @@ function Sidebar() {
         <DialogContentText>
             Upload a new Avatar for your profile 
           </DialogContentText>
-          <input type="file" value={imagefile} onChange={(e)=>fileHandler(e)} />
+          <input type="file"  onChange={(e)=>fileHandler(e)} />
 
-          {showprogress && <Uploader file={imagefile} setfile={setImagefile} setShowProgress={setShowprogress}/>}
+          {imagefile && <Uploader file={imagefile} setfile={setImagefile}/>}
           <Button onClick={closeImageUpload}>Close</Button>
         </Dialog>
       </>
