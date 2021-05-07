@@ -2,7 +2,7 @@ import React,{useState,useEffect,useContext} from "react";
 import {db,storage} from "../firebase";
 import {DataContext} from "./Dataprovider";
 const useStorage=(file)=>{
-    const [userlogin,,,]=useContext(DataContext);
+    const [userlogin,,,,,,,,,setUserDetails]=useContext(DataContext);
     const [url,setUrl]=useState(null);
     const [progress,setProgress]=useState(0);
     const [error,setError]=useState(null);
@@ -21,6 +21,8 @@ const useStorage=(file)=>{
                 photo_url:url
             })
             setUrl(url);
+            console.log(url);
+            setUserDetails(userDetails=>{return {...userDetails,photo_url:url}})
         }
         )
     },[file])

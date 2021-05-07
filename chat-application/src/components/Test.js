@@ -89,7 +89,7 @@ function Test() {
         }
         else
         {
-            alert("You don't have Admin Access to delete this Group ! ");
+            alert("This group is created by : " +selectedChat[0].admin + " , you don't have Admin Access to delete this Group ! ");
         }
     }
 

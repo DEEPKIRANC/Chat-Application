@@ -24,10 +24,9 @@ import {DataContext} from "../hooks/Dataprovider";
 import {firebaseApp} from "../firebase";
 import firebase from "firebase";
 function Sidebar() {
-    const [userlogin,,,]=useContext(DataContext);
+    const [userlogin,,,,,,,,userDetails,setUserDetails]=useContext(DataContext);
 
-    const [userDetails,setUserDetails]=useState('');
-   
+    
     const [error,setError]=useState("");
     const [open, setOpen] = useState(false);
 
@@ -84,11 +83,13 @@ function Sidebar() {
       useEffect(()=>{
         if(userlogin)
         {
+            
             db.collection("users").doc(userlogin.uid).get().then(snapshot=>
                   
               setUserDetails(snapshot.data())
                     
             )
+            console.log(userDetails);
               
         }
     },[userlogin,setUserDetails])
@@ -198,12 +199,14 @@ function Sidebar() {
     const closeImageUpload=()=>{
       
       setOpenDP(false);
+      setImagefile(null);
+      setError("");
     }
     return (
         <div className="sidebar__component">
             <div className="header">
-                <Avatar src={userDetails.photo_url !==null ? userDetails.photo_url : "https://avatars.dicebear.com/api/human/1234.svg"} style={{width:'3rem',height:'3rem'}} />
-                <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
+                <Avatar src={userDetails?.photo_url} style={{width:'3rem',height:'3rem'}} />
+                <div className="username" style={{marginLeft:"10px"}}>{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
                 <div className="status__section">
                   {userlogin && userDetails.status==="online" && <span className="statusColor" style={{marginTop:"0px",marginRight:"10px"}}></span>}
                   {userlogin && userDetails.status==="inactive" && <Brightness3Icon style={{display:"inline",color:"#ffd700"}}/>}
@@ -268,9 +271,11 @@ function Sidebar() {
         <DialogContentText>
             Upload a new Avatar for your profile 
           </DialogContentText>
-          <input type="file"  onChange={(e)=>fileHandler(e)} />
+          
+          <input type="file" style={{marginLeft:"50px"}}  onChange={(e)=>fileHandler(e)} />
 
           {imagefile && <Uploader file={imagefile} setfile={setImagefile}/>}
+          {error && <p>{error}</p>}
           <Button onClick={closeImageUpload}>Close</Button>
         </Dialog>
       </>
