@@ -74,7 +74,8 @@ function Login() {
             return db.collection("users").doc(cred.user.uid).set({
                 display_name:name,
                 status:"online",
-                createdAt:firebase.firestore.FieldValue.serverTimestamp()
+                createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+                photo_url:"https://avatars.dicebear.com/api/human/12345.svg"
             })
         })
         .then(()=>{

@@ -35,7 +35,7 @@ function Sidebar() {
     const [groupName,setGroupName]=useState("");
     const [groupDesc,setGroupDesc]=useState("");
     const [status,setStatus]=useState("online");
-
+    const [imagefile,setImagefile]=useState(null);
     const [userdropdown,setUserdropdown]=useState(false);
     
     const handleClickOpen = () => {
@@ -116,7 +116,7 @@ function Sidebar() {
     return (
         <div className="sidebar__component">
             <div className="header">
-                <Avatar src="https://avatars.dicebear.com/api/human/1234.svg" style={{width:'3rem',height:'3rem'}} />
+                <Avatar src={!userDetails.photo_url && "https://avatars.dicebear.com/api/human/1234.svg"} style={{width:'3rem',height:'3rem'}} />
                 <div className="username">{userlogin && <><h4>{userDetails.display_name}</h4></>}</div>
                 <div className="status__section">
                   {userlogin && userDetails.status==="online" && <span className="statusColor" style={{marginTop:"0px",marginRight:"10px"}}></span>}
