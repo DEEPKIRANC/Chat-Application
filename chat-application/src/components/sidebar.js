@@ -1,7 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 
 import { Avatar , IconButton } from "@material-ui/core";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -89,7 +88,7 @@ function Sidebar() {
               setUserDetails(snapshot.data())
                     
             )
-            console.log(userDetails);
+           // console.log(userDetails);
               
         }
     },[userlogin,setUserDetails])
@@ -170,7 +169,7 @@ function Sidebar() {
                 (blob) => {
                     // blob=compressed image
                     blob.name=selected.name;
-                    console.log(blob.name);
+                   // console.log(blob.name);
                     setImagefile(blob);
                 }
                     ,

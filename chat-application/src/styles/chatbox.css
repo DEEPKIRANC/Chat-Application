@@ -134,3 +134,11 @@
     display: none;
 }
 
+.deletemsg
+{
+
+
+margin-left: 10px;
+color:white;
+cursor:pointer;
+}

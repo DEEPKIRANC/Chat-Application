@@ -103,7 +103,23 @@ function Test() {
           return color;
       }
 
-  
+      const deleteMsg=(id)=>{
+
+        const messageSelected=messages.filter(msg=>msg.messageId===id)[0];
+        if(userlogin.uid===messageSelected.senderId)
+        {
+            var confirm=window.confirm("Do you wish to delete this message permanently..?")
+            if(confirm){
+                db.collection("groups").doc(selectedChat[0].id).collection("messages").doc(id).delete();
+            }
+       
+
+        }
+        else
+        {
+            alert("You cannot delete messages sent by other users..!");
+        }
+    }  
 
    
     
@@ -127,14 +143,15 @@ function Test() {
           <div className="mobile_chatbody">
           {
 
-            messages.length>0?messages.map(message=>(
+            messages.length>0?messages.map((message,index)=>(
 
-            <div key={message.messageId} className={`mobile_chat_message ${message.senderId===userlogin?.uid && `mobile_sender`}`}>
+            <div key={index} className={`mobile_chat_message ${message.senderId===userlogin?.uid && `mobile_sender`}`}>
             <p>
                 <span className="mobile_name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                 {message.message}
                 <span className="mobile_timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
-            
+                <DeleteForeverIcon style={{fontSize:"small"}} className="mobile_deletemsg" onClick={()=>deleteMsg(message.messageId)}/>
+                            
             </p>
             
         </div>

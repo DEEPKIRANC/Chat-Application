@@ -15,6 +15,7 @@ function Chatbox() {
    // const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
     const [currentUser,setCurrentUser]=useState('');
+    
     const scrollref=useRef();
     useEffect(()=>{
       
@@ -29,7 +30,7 @@ function Chatbox() {
                 const messagesArr=snapshot.docs.map(doc=>{
                     return {...doc.data(),messageId:doc.id}
                 })
-                console.log(messagesArr);
+              //  console.log(messagesArr);
                 setMessages(messagesArr);
             })
         }
@@ -37,7 +38,7 @@ function Chatbox() {
         
      
     }
-    ,[selectedChat,setMessages])
+    ,[selectedChat])
 
     useEffect(()=>{
         if(userlogin)
@@ -66,7 +67,7 @@ function Chatbox() {
             alert("You can't send empty text messages!");
         }
 
-        console.log("You have typed =>>>" + input);
+        //console.log("You have typed =>>>" + input);
         setInput("");
     }
 
@@ -96,6 +97,24 @@ function Chatbox() {
           return color;
       }
 
+    const deleteMsg=(id)=>{
+
+        const messageSelected=messages.filter(msg=>msg.messageId===id)[0];
+        if(userlogin.uid===messageSelected.senderId)
+        {
+            var confirm=window.confirm("Do you wish to delete this message permanently..?")
+            if(confirm){
+                db.collection("groups").doc(selectedChat[0].id).collection("messages").doc(id).delete();
+            }
+       
+
+        }
+        else
+        {
+            alert("You cannot delete messages sent by other users..!");
+        }
+    }  
+
 
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
    
@@ -124,15 +143,19 @@ function Chatbox() {
           <div className="chatbody">
               {
 
-                messages.length>0?messages.map(message=>(
+                messages.length>0?messages.map((message,index)=>(
 
                     
-                      <div key={message.messageId} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>  
+                      <div key={index} className={`chat_message ${message.senderId===userlogin?.uid && `sender`}`}>  
                             <p>
+                            
+                
+                              
                                 <span className="name" style={{color:generateLightColorHex(),fontWeight:"bold"}}>{message.senderName}</span>
                                 {message.message}
                                 <span className="timestamp">{message.sentAt!==null && message.sentAt.toDate().toString().trim().substring(4,28)}</span>
-                
+                                <DeleteForeverIcon style={{fontSize:"medium"}} className="deletemsg" onClick={()=>deleteMsg(message.messageId)}/>
+                            
                             </p>
                         
                     
