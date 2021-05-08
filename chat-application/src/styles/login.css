@@ -81,7 +81,15 @@
     font-family: 'Nunito','sans-serif';
 }
 
-@media screen and (max-width : 700px)
+.app__desc
+{
+    color:white;
+    
+    justify-self: center;
+}
+
+
+@media screen and (max-width : 768px)
 {
     .inner_div{
         flex-direction: column;
@@ -101,4 +109,21 @@
     {
         font-size: 1rem;
     }
+    .app__desc
+    {
+        margin-bottom: 2rem;
+    }
+    .app__desc > h1
+    {
+        font-size: 1.25rem;
+    }
+    .app__desc > p
+    {
+        font-size: 0.7rem;
+    }
+    .app__desc >h1,p{
+        text-align: center;
+        
+    }
+
 }

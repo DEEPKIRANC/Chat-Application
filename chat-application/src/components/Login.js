@@ -135,6 +135,7 @@ function Login() {
         <div className="main_div">
             
             <div className="inner_div">
+            <div className="app__desc"><h1>InstaChat</h1> <br/> <p> A cross platform,device friendly chat app to stay in touch with friends and family</p></div>    
             <div className="imageelement"></div>
             <form className="loginform">
 
