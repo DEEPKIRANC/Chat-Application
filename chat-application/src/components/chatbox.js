@@ -1,9 +1,13 @@
 import React ,{useState,useEffect,useContext,useRef} from 'react'
 import {useMediaQuery} from "react-responsive";
 import EditIcon from '@material-ui/icons/Edit';
-import MoreVert from '@material-ui/icons/MoreVert';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider"
@@ -15,7 +19,8 @@ function Chatbox() {
    // const [boolval,setBoolVal]=useState(false);
     const [input,setInput]=useState("");
     const [currentUser,setCurrentUser]=useState('');
-    
+    const [open,setOpen]=useState(false);
+    const [groupdescription,setgroupDescription]=useState(selectedChat[0].description);
     const scrollref=useRef();
     useEffect(()=>{
       
@@ -116,6 +121,31 @@ function Chatbox() {
     }  
 
 
+    const handleClose=(e)=>{
+        e.preventDefault();
+        if(userlogin.uid===selectedChat[0].createdBy)
+        {
+            if(groupdescription.trim().length>0)
+            {
+            db.collection("groups").doc(selectedChat[0].id).update({
+                description:groupdescription
+            })
+            setOpen(false);
+            }
+            else
+            {
+                alert("Group Description can't be empty!");
+            }
+        }
+
+    }
+
+    const handleCloseDialog=()=>{
+        setOpen(false);
+        setgroupDescription("");
+    }
+
+
     let windowSize=useMediaQuery({query:`(max-width:600px)`});
    
    if(!windowSize)
@@ -134,8 +164,38 @@ function Chatbox() {
                 <p>{selectedChat.length>0?selectedChat[0].description:null}</p>
             </div>
                 <IconButton>
-                    <EditIcon style={{color:"white"}}/>
+                    <EditIcon onClick={()=>setOpen(true)} style={{color:"white"}}/>
                 </IconButton>    
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Group Name : {selectedChat.length>0?selectedChat[0].name:null} (created by - {selectedChat.length>0?selectedChat[0].admin:null})
+                       </DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            value={groupdescription}
+                            onChange={(e)=>setgroupDescription(e.target.value)}
+                            id="name"
+                            label="Group Description"
+                            type="text"
+                            required="required"
+                            disabled={userlogin.uid!==selectedChat[0].createdBy}
+                            fullWidth
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={(e)=>handleClose(e)} color="primary" disabled={userlogin.uid!==selectedChat[0].createdBy}>
+                            Update
+                        </Button>
+                        <Button onClick={handleCloseDialog} color="primary">
+                            Cancel
+                        </Button>
+                    </DialogActions>
+                </Dialog>
                 <IconButton>
                     <DeleteForeverIcon onClick={deleteGroup} style={{color:"white"}}/>
                 </IconButton>                

@@ -2,10 +2,13 @@ import React,{useState,useEffect,useContext,useRef} from 'react';
 import {Link} from "react-router-dom";
 import "../styles/mobiletest.css";
 import EditIcon from '@material-ui/icons/Edit';
-import MoreVert from '@material-ui/icons/MoreVert';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider";
@@ -15,6 +18,8 @@ import firebase from "firebase";
 function Test() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
     const [currentUser,setCurrentUser]=useState("");
+    const [open,setOpen]=useState(false);
+    const [groupDescription,setGroupDescription]=useState(selectedChat[0].description);
     const [input,setInput]=useState("");
     const randomdiv=useRef();
     
@@ -119,7 +124,32 @@ function Test() {
         {
             alert("You cannot delete messages sent by other users..!");
         }
-    }  
+    }
+    
+    
+    const handleClose=(e)=>{
+        e.preventDefault();
+        if(userlogin.uid===selectedChat[0].createdBy)
+        {
+            if(groupDescription.trim().length>0)
+            {
+            db.collection("groups").doc(selectedChat[0].id).update({
+                description:groupDescription
+            })
+            setOpen(false);
+            }
+            else
+            {
+                alert("Group Description can't be empty!");
+            }
+        }
+
+    }
+
+    const handleCloseDialog=()=>{
+        setOpen(false);
+        setGroupDescription("");
+    }
 
    
     
@@ -133,9 +163,40 @@ function Test() {
             <h3>{selectedChat.length>0?selectedChat[0].name:null}</h3>
                 <p>{selectedChat.length>0?selectedChat[0].description.substring(0,20)+"...":null}</p>
             </div>
-                <IconButton>
-                    <EditIcon style={{color:"white"}}/>
+            <IconButton>
+                    <EditIcon onClick={()=>setOpen(true)} style={{color:"white"}}/>
                 </IconButton>    
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Group Name : {selectedChat.length>0?selectedChat[0].name:null} (created by - {selectedChat.length>0?selectedChat[0].admin:null})
+                       </DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            value={groupDescription}
+                            onChange={(e)=>setGroupDescription(e.target.value)}
+                            id="name"
+                            label="Group Description"
+                            type="text"
+                            required="required"
+                            disabled={userlogin.uid!==selectedChat[0].createdBy}
+                            fullWidth
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={(e)=>handleClose(e)} color="primary" disabled={userlogin.uid!==selectedChat[0].createdBy}>
+                            Update
+                        </Button>
+                        <Button onClick={handleCloseDialog} color="primary">
+                            Cancel
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                    
                 <IconButton>
                     <DeleteForeverIcon onClick={deletegroup} style={{color:"white"}}/>
                 </IconButton>                
