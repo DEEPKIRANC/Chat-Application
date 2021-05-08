@@ -161,16 +161,12 @@ function Test() {
     <div ref={randomdiv}></div>
           </div>
           <div className="mobile_chat__footer">
-              <IconButton>
-                <InsertEmoticonIcon style={{color:"white",marginBottom:"20px"}}/>
-              </IconButton>
+              
               <form>
                 <input type="text" placeholder="Type Your Message Here" value={input}  onChange={e=>setInput(e.target.value)} />
                 <button type="submit"  onClick={(e)=>sendMessage(e)}></button>
               </form>
-              <IconButton>
-                <AddAPhotoIcon style={{color:"white",marginBottom:"20px"}}/>
-              </IconButton>  
+             
           </div>   
 
        </div>

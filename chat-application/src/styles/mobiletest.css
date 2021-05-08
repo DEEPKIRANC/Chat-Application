@@ -105,15 +105,17 @@
 {
     flex:0.07;
     background-color: #22303C;
-   
+    padding:0.5rem 0rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 .mobile_chat__footer > form
 {
-    flex:1;
+    flex:0.90;
     display: flex;
+    justify-content: center;
+    align-items: center;
     
 }
 

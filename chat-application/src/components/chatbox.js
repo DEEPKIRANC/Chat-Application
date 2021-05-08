@@ -166,16 +166,12 @@ function Chatbox() {
               <div ref={scrollref}></div>
           </div>    
           <div className="chat__footer">
-              <IconButton>
-                <InsertEmoticonIcon style={{color:"white",marginBottom:"20px"}}/>
-              </IconButton>
+             
               <form>
-                <input type="text" placeholder="Type Your Message Here" value={input}  onChange={e=>setInput(e.target.value)} />
+                <input type="text" placeholder="Type Your Message Here..." value={input}  onChange={e=>setInput(e.target.value)} />
                 <button type="submit"  onClick={(e)=>sendMessage(e)}></button>
               </form>
-              <IconButton>
-                <AddAPhotoIcon style={{color:"white",marginBottom:"20px"}}/>
-              </IconButton>  
+              
           </div>   
 
        </div> 
