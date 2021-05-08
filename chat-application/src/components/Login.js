@@ -150,7 +150,9 @@ function Login() {
                 <button type="submit" onClick={e=>handleLogin(e)} >Sign In</button>
                 <p>Don't Have an Account ? <span style={spanStyle} onClick={()=>setHasAccount(!hasAccount)}>Sign Up</span></p>
                 </>
-                }        
+                } 
+                <span style={{fontSize:"0.75rem"}}>Guest Creds:- Email - deep@gmail.com | Pass - 123456</span>
+
             </form>
             </div>    
         </div>
