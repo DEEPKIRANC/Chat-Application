@@ -16,7 +16,7 @@ useEffect(()=>{
     db.collection("groups").orderBy("createdAt","desc").onSnapshot((snapshot)=>{
        
         const groups=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
-        //console.log(groups);
+        console.log(groups);
         setSelectedChat(groups);    
         setGroups(groups);
     });

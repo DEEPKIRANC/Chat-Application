@@ -20,7 +20,7 @@ function Chatbox() {
     const [input,setInput]=useState("");
     const [currentUser,setCurrentUser]=useState('');
     const [open,setOpen]=useState(false);
-    const [groupdescription,setgroupDescription]=useState(selectedChat[0].description);
+    const [groupdescription,setgroupDescription]=useState(selectedChat.length>0?selectedChat[0].description:"");
     const scrollref=useRef();
     useEffect(()=>{
       
