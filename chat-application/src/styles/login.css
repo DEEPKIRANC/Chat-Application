@@ -84,7 +84,7 @@
 .app__desc
 {
     color:white;
-    
+    user-select: none;    
     justify-self: center;
 }
 

@@ -19,7 +19,7 @@ function Test() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
     const [currentUser,setCurrentUser]=useState("");
     const [open,setOpen]=useState(false);
-    const [groupDescription,setGroupDescription]=useState(selectedChat[0].description);
+    const [groupDescription,setGroupDescription]=useState(selectedChat.length>0?selectedChat[0].description:"");
     const [input,setInput]=useState("");
     const randomdiv=useRef();
     
@@ -83,18 +83,18 @@ function Test() {
 
 
     const deletegroup=()=>{
-        if(userlogin.uid===selectedChat[0].createdBy)
+        if(userlogin.uid===selectedChat[0]?.createdBy)
         {
 
         var confirm=window.confirm("Do you wish to delete this group permanently..?")
         if(confirm)
         {    
-        db.collection("groups").doc(selectedChat[0].id).delete()
+        db.collection("groups").doc(selectedChat[0]?.id).delete()
         }    
         }
         else
         {
-            alert("This group is created by : " +selectedChat[0].admin + " , you don't have Admin Access to delete this Group ! ");
+            alert("This group is created by : " +selectedChat[0]?.admin + " , you don't have Admin Access to delete this Group ! ");
         }
     }
 
@@ -115,7 +115,7 @@ function Test() {
         {
             var confirm=window.confirm("Do you wish to delete this message permanently..?")
             if(confirm){
-                db.collection("groups").doc(selectedChat[0].id).collection("messages").doc(id).delete();
+                db.collection("groups").doc(selectedChat[0]?.id).collection("messages").doc(id).delete();
             }
        
 
@@ -129,7 +129,7 @@ function Test() {
     
     const handleClose=(e)=>{
         e.preventDefault();
-        if(userlogin.uid===selectedChat[0].createdBy)
+        if(userlogin.uid===selectedChat[0]?.createdBy)
         {
             if(groupDescription.trim().length>0)
             {
@@ -183,12 +183,12 @@ function Test() {
                             label="Group Description"
                             type="text"
                             required="required"
-                            disabled={userlogin.uid!==selectedChat[0].createdBy}
+                            disabled={userlogin.uid!==selectedChat[0]?.createdBy}
                             fullWidth
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={(e)=>handleClose(e)} color="primary" disabled={userlogin.uid!==selectedChat[0].createdBy}>
+                        <Button onClick={(e)=>handleClose(e)} color="primary" disabled={userlogin.uid!==selectedChat[0]?.createdBy}>
                             Update
                         </Button>
                         <Button onClick={handleCloseDialog} color="primary">

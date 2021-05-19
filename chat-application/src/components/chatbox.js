@@ -7,13 +7,15 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {Avatar , IconButton} from "@material-ui/core";
 import {DataContext} from "../hooks/Dataprovider"
 import {db} from "../firebase";
 import firebase from "firebase";
-import "../styles/chatbox.css"
+import "../styles/chatbox.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Chatbox() {
     const [userlogin,,selectedChat,,,,messages,setMessages]=useContext(DataContext);
    // const [boolval,setBoolVal]=useState(false);
@@ -69,7 +71,8 @@ function Chatbox() {
         }
         else
         {
-            alert("You can't send empty text messages!");
+            toast.warning("You can't send empty text messages",{position:"top-right"});
+            
         }
 
         //console.log("You have typed =>>>" + input);
@@ -88,8 +91,8 @@ function Chatbox() {
         }
         else
         {
-
-            alert("This group is created by : "+selectedChat[0].admin+ " , you don't have Admin Access to delete this Group ! ");
+            toast.error("This group is created by : "+selectedChat[0].admin+ " , you don't have Admin Access to delete this Group ! ",{position:"top-right"})
+            
         }
     }
 
@@ -116,7 +119,8 @@ function Chatbox() {
         }
         else
         {
-            alert("You cannot delete messages sent by other users..!");
+            toast.error("You cannot delete messages sent by other users..!",{position:"top-right"});
+            
         }
     }  
 
@@ -134,7 +138,7 @@ function Chatbox() {
             }
             else
             {
-                alert("Group Description can't be empty!");
+              toast.warning("Group Description can't be empty",{position:"top-right"});
             }
         }
 
@@ -155,6 +159,7 @@ function Chatbox() {
 
 
     return (
+        <>
         <div className="chatbox__body">
           <div className="header">
           
@@ -183,12 +188,12 @@ function Chatbox() {
                             label="Group Description"
                             type="text"
                             required="required"
-                            disabled={userlogin.uid!==selectedChat[0].createdBy}
+                            disabled={userlogin.uid!==selectedChat[0]?.createdBy}
                             fullWidth
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={(e)=>handleClose(e)} color="primary" disabled={userlogin.uid!==selectedChat[0].createdBy}>
+                        <Button onClick={(e)=>handleClose(e)} color="primary" disabled={userlogin.uid!==selectedChat[0]?.createdBy}>
                             Update
                         </Button>
                         <Button onClick={handleCloseDialog} color="primary">
@@ -234,7 +239,9 @@ function Chatbox() {
               
           </div>   
 
-       </div> 
+       </div>
+       <ToastContainer/>
+       </> 
     )
    }
    else

@@ -1,5 +1,4 @@
 import React,{useState,useEffect,useContext} from 'react'
-
 import { Avatar , IconButton } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import Button from "@material-ui/core/Button";
@@ -13,8 +12,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
-
-
 import "../styles/sidebar.css"
 import {db} from "../firebase";
 import SidebarChat from './sidebar__chat';
@@ -22,16 +19,17 @@ import Uploader from "./Uploader.js";
 import {DataContext} from "../hooks/Dataprovider";
 import {firebaseApp} from "../firebase";
 import firebase from "firebase";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+ 
+
 function Sidebar() {
     const [userlogin,,,,,,,,userDetails,setUserDetails]=useContext(DataContext);
-
-    
     const [error,setError]=useState("");
     const [open, setOpen] = useState(false);
-
     const [openStatusModal,setModal]=useState(false);
     const [openDP,setOpenDP]=useState(false);
-
     const [groupName,setGroupName]=useState("");
     const [groupDesc,setGroupDesc]=useState("");
     const [status,setStatus]=useState("online");
@@ -59,6 +57,8 @@ function Sidebar() {
             createdAt:firebase.firestore.FieldValue.serverTimestamp(),
             createdBy:userlogin.uid,
             admin:userDetails.display_name
+          }).then(()=>{
+            toast.success("New Group Added!",{position:"top-right"});
           })
 
           setOpen(false);
@@ -67,7 +67,7 @@ function Sidebar() {
         }
         else
         {
-          alert("Group Name or Description can't be empty!");
+          toast.warning("Group name or description can't be empty!",{position:"top-right"});
         }
        
       };
@@ -77,9 +77,7 @@ function Sidebar() {
       setGroupName("");
       setGroupDesc("");
     }  
-
-    
-      useEffect(()=>{
+    useEffect(()=>{
         if(userlogin)
         {
             
@@ -88,28 +86,17 @@ function Sidebar() {
               setUserDetails(snapshot.data())
                     
             )
-           // console.log(userDetails);
-              
         }
     },[userlogin,setUserDetails])
 
     const handleLogOut=()=>{
         var answer=window.confirm("Do you wish to log out?");
         if(answer)
-        {
-          
+        { 
           firebaseApp.auth().signOut();
-          
         }
-
-
- 
-        
-    }
-
-    
-
-    const closeStatusModal=(e)=>{
+}
+ const closeStatusModal=(e)=>{
       e.preventDefault();
       db.collection("users").doc(userlogin.uid).update({
 
@@ -138,8 +125,6 @@ function Sidebar() {
       }
       return [width, height];
     }
-
-
 
    // Main logic for image upload
    
@@ -176,12 +161,7 @@ function Sidebar() {
                 MIME_TYPE,
                 QUALITY
                 );
-
-
-            }
-
-       
-        
+ }
         setError("");
        
     }
@@ -192,9 +172,6 @@ function Sidebar() {
     }
 }
 
-
-
-
     const closeImageUpload=()=>{
       
       setOpenDP(false);
@@ -202,6 +179,7 @@ function Sidebar() {
       setError("");
     }
     return (
+        <>
         <div className="sidebar__component">
             <div className="header">
                 <Avatar src={userDetails?.photo_url} style={{width:'3rem',height:'3rem'}} />
@@ -222,9 +200,7 @@ function Sidebar() {
                 <ExpandMoreIcon onClick={()=>setUserdropdown(prev=>!prev)} style={{color:"white",marginTop:"-15px"}}/>
                 
             </IconButton>}
-
-
-               {userdropdown && <> <IconButton>
+            {userdropdown && <> <IconButton>
                 
                <ExpandLessIcon className="expand__icon" onClick={()=>setUserdropdown(prev=>!prev)} style={{color:"white",marginTop:"-15px"}}/>
                
@@ -279,11 +255,9 @@ function Sidebar() {
         </Dialog>
       </>
            }
-                
-            </div>
+ </div>
             <SidebarChat/>
-
-            {/*modal code*/}
+ {/*modal code*/}
 
             <Dialog
         open={open}
@@ -327,7 +301,8 @@ function Sidebar() {
         </DialogActions>
       </Dialog>
         </div>
+       <ToastContainer/>    
+    </>
     )
 }
-
 export default Sidebar

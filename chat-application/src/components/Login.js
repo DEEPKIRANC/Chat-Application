@@ -3,6 +3,8 @@ import "../styles/login.css"
 import {DataContext} from "../hooks/Dataprovider";
 import {db,firebaseApp} from "../firebase";
 import firebase from "firebase";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 
 function Login() {
@@ -35,7 +37,7 @@ function Login() {
         .signInWithEmailAndPassword(email,password)
         .then(()=>{
             console.log("user added ");
-           
+            toast.success("Signed In Successfully!",{position:"top-right"});
         })
         .catch(err=>{
             switch(err.code)
@@ -44,17 +46,17 @@ function Login() {
                 case "auth/user-disabled":
                 case "auth/user-not-found":
                     setEmailError(err.message);
-                    alert(err.message);
+                    toast.error(err.message,{position:"top-right"});
                     clearInputs();   
                     break;
                 case "auth/wrong-password":
                     setPasswordError(err.message);
-                    alert(err.message);
+                    toast.error(err.message,{position:"top-right"});
                     clearInputs();
                     break;        
             }
         })
-        alert("You are being logged in!");
+        
     }
 
 
@@ -63,7 +65,7 @@ function Login() {
         clearErrors();
         if(name.trim().length<1)
         {
-        alert("Display Name can't be empty!");
+        toast.warning("Display Name can't be empty!",{position:"top-right"});
         }
         else
         {
@@ -80,6 +82,7 @@ function Login() {
         })
         .then(()=>{
             console.log("user added ");
+            toast.success("Signed In Successfully!",{position:"top-right"});
            
         })
         .catch(err=>{
@@ -88,17 +91,17 @@ function Login() {
                 case "auth/email-already-in-use":
                 case "auth/invalid-user":
                     setEmailError(err.message);
-                    alert(err.message);
+                    toast.error(err.message,{position:"top-right"});
                     clearInputs();
                     break;
                 case "auth/weak-password":
                     setPasswordError(err.message);
-                    alert(err.message);
+                    toast.error(err.message,{position:"top-right"});
                     clearInputs();
                     break;        
             }
         })
-        alert("You are being logged in!");
+        
     }
     }
     
@@ -132,6 +135,7 @@ function Login() {
     }
 
     return (
+        <>
         <div className="main_div">
             
             <div className="inner_div">
@@ -157,6 +161,8 @@ function Login() {
             </form>
             </div>    
         </div>
+        <ToastContainer/>
+        </>
     )
 }
 
