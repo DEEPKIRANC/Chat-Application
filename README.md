@@ -1,0 +1,16 @@
+# Chat-Application
+A full stack chat application built using ReactJS and firebase i.e InstaChat.
+
+This app was built to understand how real-time communication and messaging works in apps like Whatsapp, Teams, Slack, etc.
+
+Key Features:
+
+1. Create New Groups and send text messages.
+2. Cross-Platform Compatibility.
+3. User Authentication with email and password.
+4. Set Status, Change display picture.
+5. Edit Group Description.
+6. Delete Groups and messages.
+
+
+Technology used : HTML5, JavaScript, CSS3 , ReactJS , Firebase and Material UI.
