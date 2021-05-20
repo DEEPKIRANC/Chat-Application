@@ -6,6 +6,7 @@ import {BrowserRouter as Router , Switch , Route} from "react-router-dom";
 import Test from './components/Test';
 import {DataContext} from "./hooks/Dataprovider";
 import Login from './components/Login';
+import ErrorPage from './components/ErrorPage';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
           </div> : <Login />  }
         
         </Route>
-
+        <Route component={ErrorPage}></Route>
         </Switch>
       </div>  
     
